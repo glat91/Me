@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="heigth=device-heigth, initial-scale=1.0">
+<html lag="en">
+    <header>
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@300&display=swap" rel="stylesheet"> 
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+        <meta charset="UTF-8">
+            <div class="menu" id="menu-principal">                
+                <div class="menu__home" id="menu-home">
+                    <button id="btn-home" onclick="showDrop('drp1', 'btn-home')"><img src="https://image.flaticon.com/icons/png/512/69/69524.png" style="width: 25px; height: 15px;">Home</button>
+                    <ul class="menu__dropdown" id="drp1">
+                        <button id="btn-presentacion"onclick="pagePresentacion('reciclar')">Presentacion</button>
+                        <button id="btn-lenguajes" onclick="pageLenguajes('reciclar')">Lenguajes</button>
+                        <button id="btn-contacto" onclick="showContacto(['reciclar'])">Contacto</button>                    
+                    </ul>
+                </div>
+                <div class="menu__project">
+                    <button id="btn-project" onclick="showDrop('drp2', 'btn-project')"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/Add_document_icon_%28the_Noun_Project_27896%29.svg/1024px-Add_document_icon_%28the_Noun_Project_27896%29.svg.png" style="width: 25px; height: 15px;">Samples</button>
+                    <ul class="menu__dropdown" id="drp2">
+                        <button onclick="pageLogin('reciclar')">Login CSS</button>
+                        <button onclick="createTable('reciclar')">Peticion WebApi</button>
+                        <button onclick="pageDnD('reciclar')">Mover elementos</button>
+                        <button>Cards CSS</button> 
+                        <button>DashBoard</button>                  
+                    </ul>
+                </div>
+                <div class="theme">
+                    <div class="theme__menu" id="theme">
+                        <button id="btn-theme" onclick="showDrop('drp3', 'btn-theme')"><img src="https://image.flaticon.com/icons/png/512/69/69524.png" style="width: 25px; height: 15px;">Cambiar Tema</button>
+                        <ul class="theme__dropdown" id="drp3">
+                            <button id="btn-uno"onclick="changueTheme('uno')">AOT</button>
+                            <button id="btn-dos" onclick="changueTheme('dos')">MLP</button>
+                            <button id="btn-tres" onclick="changueTheme('tres')">Mono</button>                    
+                        </ul>
+                    </div>
+                </div>
+            </div>                       
+        </nav>
+              
+    </header>
+    <body id="body">
+        <!--
+            Colores a Probar En fondo
+            Naranja-Azul Mad-Max
+            Amarillo-Morado Moonligth
+            Cafe-Verde AOT
+         -->
+        <div class="lateral" id="body-lateral">
+            <div id="lateral-list" class="lateral__list">
+                <img id="img-perfil" src="https://static.wikia.nocookie.net/058f2a6c-7690-4d7f-9e16-5d9477461fff">
+                <div id="lateral-box" class="lateral__box">
+                    <h1>Jose Manuel Uribe Almaguer</h1>
+                    <br>
+                    <p>Soy una persona analitica, autodidacta y entusiaste de las tecnologias emergentes, con conocimientos y experiencia en Backend y Frontend, dominado mayormente el backend</p>
+                    <br>
+                    <p class="desaparecer">Experiencia en desarrolo de WebApi, Android, Aplicaciones web y Automatizacion de procesos, asi tambien como sus diferentes patrones de diseño</p>
+                    <br>
+                    <p class="desaparecer">Atualmente estudiante de la UR en la Ingenieria en Tecnologias Computacionalees</p>
+                    <p></p>
+                </div>
+            </div>
+        </div>
+        <div class="principal" id="body-principal">
+            <div class="reciclar" id="reciclar">
+                <div class="login-page">
+                    <div class="login-page__btn" id="login-activate">
+                        
+                        <button onclick="showLogin()"><img src="C:\Proyectos\HTML\iniciar-sesion.png" alt=""></button>
+                    </div>
+                    
+                    <div class="login-container" id="login-container">
+                        <div class="login-container__data">
+                            
+                            <h1>Usuario</h1>
+                            <input type="email" name="email" id="email">
+                            <h1>Constrasena</h1>
+                            <input type="password" name="password" id="password">
+                            <button>Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> 
+    </body>
+</html>
+
+<style>
+    :root {
+        --cero-3d-efect:0 1rem 1.25rem 0 rgba(22,75,195,0.50),
+							0 -0.25rem 1.5rem rgba(110, 15, 155, 1) inset,
+							0 0.75rem 0.5rem rgba(255,255,255, 0.4) inset,
+							0 0.25rem 0.5rem 0 rgba(180, 70, 207, 1) inset;
+        --cero-3d-boxshadow : 0 1px 2px rgba(0,0,0,0.07), 
+                            0 2px 4px rgba(0,0,0,0.07), 
+                            0 4px 8px rgba(0,0,0,0.07), 
+                            0 8px 16px rgba(0,0,0,0.07),
+                            0 16px 32px rgba(0,0,0,0.07), 
+                            0 32px 64px rgba(0,0,0,0.07);
+        --cero-divshadow : 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        --cero-selection : var(--dos-seleccion);
+
+        --uno-principal: rgb(110, 88, 100, .5),;
+        --uno-secundario: rgb(66, 105, 74, .5);
+        --uno-extra: rgba(70, 103, 147, 0.522);
+        --uno-seleccion: rgb(143, 94, 78);
+        --uno-texto: #FFFFFF;
+        --uno-principal-transparente: rgba(110, 88, 100, 0.3);
+        --uno-secundario-transparente: rgba(66, 105, 74, 0.3);
+        --uno-3defecto:0 1rem 1.25rem 0 rgba(22,75,195,0.50),
+							0 -0.25rem 1.5rem rgba(110, 88, 100, 1) inset,
+							0 0.75rem 0.5rem rgba(255,255,255, 0.4) inset,
+							0 0.25rem 0.5rem 0 rgba(70, 103, 147, 1) inset;
+
+        --dos-principal: rgb(84, 70, 124. .5);
+        --dos-secundario: rgb(254, 138, 213, .5);
+        --dos-extra: rgba(157, 89, 184, 0.5);
+        --dos-seleccion: rgb(161, 98, 168);
+        --dos-texto: #FFFFFF;
+        --dos-principal-transparente: rgba(84, 70, 124, 0.3);
+        --dos-secundario-transparente: rgba(254, 138, 213, 0.3);
+        --dos-3defecto:0 1rem 1.25rem 0 rgba(22,75,195,0.5),
+							0 -0.25rem 1.5rem rgba(84, 70, 124, 1) inset,
+							0 0.75rem 0.5rem rgba(255,255,255, 0.4) inset,
+							0 0.25rem 0.5rem 0 rgba(254, 138, 213, 1) inset;
+        
+
+        --tres-principal: rgba(6, 6, 8, .5);
+        --tres-secundario: rgb(31, 30, 32, .5);
+        --tres-extra: rgba(81, 82, 92, 1);
+        --tres-seleccion: rgb(81, 82, 92);
+        --tres-texto: #FFFFFF;
+        --tres-texto-secundario: #FFFFFF;
+        --tres-principal-transparente: rgba(6, 6, 8, 0.3);
+        --tres-secundario-transparente: rgba(31, 30, 32, 0.3);
+        --tres-3defecto:0 1rem 1.25rem 0 rgba(22,75,195,0.50),
+							0 -0.25rem 1.5rem rgba(6, 6, 8, 1) inset,
+							0 0.75rem 0.5rem rgba(255,255,255, 0.4) inset,
+							0 0.25rem 0.5rem 0 rgba(81, 82, 92, 1) inset;}
+    /* Basico */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;}
+    body{
+        /*background-color: var(--dos-principal-transparente);*/
+        flex-wrap: wrap;
+        background-image: url('https://images.unsplash.com/photo-1458682625221-3a45f8a844c7?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1867&q=80');
+        /*background-image:linear-gradient(to left, var(--dos-extra) 66%, var(--dos-secundario));*/}
+    /* Menu*/
+    .menu{
+        margin-left: .5%;
+        width: 98.7%;
+        height: 20%;
+        display: flex;
+        background-color: var(--dos-principal);
+        justify-content:space-around;
+        align-items: center;
+        margin: auto;
+        box-shadow: 6px 6px rgba(0, 0, 0, 0.322);
+        border-radius: 15px;
+        margin-block-end: 5px;
+        margin-block-start: 5px;
+        box-shadow: var(--dos-3defecto)}
+    .menuToggle{
+        display: none;}
+    .menu__home button, .menu__project button, .theme button{
+        width: 100%;
+        height: 50px;
+        background: none;
+        border: none;
+        font-family: "Copperplate";
+        color: var(--dos-texto);
+        margin-right: 50px;
+        font-size: 20px;
+        cursor: pointer;
+        justify-content:left;}
+    .menu__dropdown button, .theme__dropdown button{
+        height: 100%;
+        width: 100%;
+        margin-right: 0px;
+        margin-top: 1px;
+        font-size: 20px;
+        font-family: "Copperplate";
+        box-shadow: var(--uno-3defecto);}
+    .menu__project, .menu__home{
+        position: relative;}
+    .menu__dropdown, .theme__dropdown{
+        text-align:center;
+        width: 100%;
+        height: 100%;
+        background-color: var(--dos-secundario);
+        color: white;
+        display: flex;
+        position:absolute;
+        justify-content: center;
+        align-items: center;
+        z-index: 1;}
+    .menu__project ul, .menu__home ul, .theme__menu ul{
+        background-color: none;
+        position: absolute;
+        margin-top: 10px;
+        width: 150px;
+        height: 200px;
+        display: none;
+        justify-content: space-around;
+        align-items: center;
+        flex-direction: column;
+        list-style: none;}
+    .menu__home a, .menu__project a{
+        color: var(--dos-texto);
+        text-decoration: none;
+        text-align: center;}
+    .theme button{
+        right: 0px;}
+    /* Body */
+    .main{
+        background-color: white;
+        width: 100%;
+        height: 90vh;
+       
+        }
+    .lateral{
+        float: left;
+        width: 20%;
+        height: 90vh;
+        background-color:var(--dos-principal);
+        margin-left: 0%;
+        border-radius: 15px;
+        margin-left: .5%;
+        z-index: 0;
+        
+        overflow-x: auto;
+        box-shadow: 0 1rem 1.25rem 0 rgba(22,75,195,0.50),
+							0 -0.25rem 1.5rem rgba(84, 70, 124, 0.932) inset,
+							0 0.75rem 0.5rem rgba(255,255,255, 0.4) inset,
+							0 0.25rem 0.5rem 0 rgba(180, 70, 207, 1) inset;}
+    .lateral img{
+        margin-top: 6%;
+        margin-left: 10%;
+        height: 100%;
+        width: 80%;
+        border-radius: 60%;
+        border: 2px solid var(--dos-secundario-transparente);
+        box-shadow: 0 .6rem 1.25rem 0 rgba(11, 37, 97, 0.5),
+							0 -0.25rem 1.5rem rgba(84, 70, 124, 1) inset,
+							0 0.75rem 0.5rem rgba(255,255,255, 0.4) inset,
+							0 0.25rem 0.5rem 0 rgba(254, 138, 213, 1) inset;}
+    .lateral__box{
+        padding: 20px;
+        
+        overflow-x: auto;
+        color: blanchedalmond;}
+    .lateral__box h1{
+        font-size: 25px;
+        text-align: center;}
+    .principal{     
+        flex-direction: row;  
+        left: 21%;
+        position:fixed;
+        width: 78%;
+        height: 90%;
+        background-color: var(--dos-secundario-transparente);
+        right: 0%;
+        margin-left: .5%;
+        border-radius: 15px;
+        box-shadow: 6px 6px rgba(0, 0, 0, 0.322);
+        box-shadow: 0 1rem 1.25rem 0 rgba(22,75,195,0.50),
+							0 -0.25rem 1.5rem rgba(84, 70, 124, 0.932) inset,
+							0 0.75rem 0.5rem rgba(255,255,255, 0.4) inset,
+							0 0.25rem 0.5rem 0 rgba(180, 70, 207, 1) inset;}
+    .principal h2 {
+        font-size: 50px;
+        margin-top: 1%;
+        margin-left: 35%;
+        color: var(--dos-texto);}
+    /* Card*/
+    .card-grid{
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        grid-column-gap: 24px;
+        grid-row-gap: 24px;
+        
+        max-width: 1200px;
+        width: 100%;}
+    @media(max-width: 540px){
+        .menu{
+            margin-left: 10%;}
+        .card-grid{
+            grid-template-columns: repeat(2, 1fr); }
+        .principal{
+            width: 75%;
+            margin-left: 10%;
+            overflow-x: auto;}
+        .lateral{
+            margin-left: 10%;
+            float:none;
+            width: 100%;
+            height: 150px;
+        }
+        .lateral img{
+            margin-top: 1%;
+            margin-left: 0;
+            width: 28%;
+            float: left;
+        }   
+        .lateral__box{
+            font-size: 15px;
+        }
+        .desaparecer{
+            display: none;
+        }
+        .principal{
+            position: relative;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }  
+        .login-container__data{
+            width: 100%;
+            height: 50vh;
+            background-color:green ;
+        }   
+        .login-page{
+            background-size: cover;
+            background-position: center;
+        }
+
+
+    }
+    @media(min-width: 540px){
+        .card-grid{
+            grid-template-columns: repeat(3, 1fr);}
+        
+    
+    }
+    @media(min-width: 960px){
+        .card-grid{
+            grid-template-columns: repeat(4, 1fr);
+           }
+         .principal{
+            width: 78%;
+            height: 90%;
+            left: 21%;
+        }
+        
+    }
+    .card{
+        list-style: none;
+        position: relative;}
+    .card:before{
+    content: '';
+    display: block;
+    padding-bottom: 100%;
+    width: 100%;}
+    .card__background{
+    background-size: cover;
+    background-position: center;
+    border-radius: 24px;
+    bottom: 0;
+    filter: brightness(0.75) saturate(1.2) contrast(0.85);
+    left: 0;
+    position:absolute;
+    right: 0;
+    top: 0;
+    transform-origin: center;
+    transition: 
+        filter 200ms linear,
+        transform 200ms linear;}
+    .card:hover .card__background{
+        transform: scale(1.05) translateZ(0);
+        padding-bottom: 100%;}
+    .card-grid:hover > .card:not(:hover) .card__background{
+        filter: brightness(0.5) saturate(0) contrast(1.2) blur(20px);}
+    .card__content{
+    left: 0;
+    padding: 24px;
+    position: absolute;
+    top: 0;}
+    .card__categoria{
+    color: var(--dos-texto);
+    font-size: 1rem;
+    margin-bottom: 8px;
+    text-transform: uppercase;}
+    /* Login-Page */
+    .login-page{
+        width: 80%;
+        height: 80vh;
+        background-image: url('https://images.unsplash.com/photo-1619429572703-e52c441c5e46?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+        background-size: cover;
+        display: grid;
+        margin-top: 4%;
+        margin-left:10%;}
+
+    /*Aqui hcer display block*/
+    .login-page__btn{
+        margin: 0;
+        position: absolute;
+        top: 50%;
+        left: 47%;
+        -ms-transform: translateY(-50%);
+        transform: translateY(-50%);
+        display: block;
+        opacity: .3;
+        transition: 2s;}
+    .login-page__btn button{
+        background: none;
+    }
+    .login-container{
+        margin-top: 10%;
+        margin-left: 10%;
+        width: 80%;
+        height: 55vh;   
+        display: none;  }
+    .login-container__data{
+        width: 60%;
+        height: 40vh;
+        background-color: rgb(226, 152, 15, .3);
+        margin: auto;
+        margin-top: 6%;
+        align-self:center;
+        border-radius: 20px;
+        border: 1px solid black;
+        box-shadow: 0 1rem 1.25rem 0 rgba(245, 245, 38, 0.5),
+							0 -0.25rem 0.5rem rgb(155, 94, 15) inset,
+							0 0.25rem 0.5rem rgba(255,255,255, 0.4) inset,
+							0 0.1rem 0.1rem 0 rgb(207, 70, 70) inset;}
+    .login-container__data h1, input{
+        color: var(--dos-texto);}
+    .login-container__data h1{
+        font-family: 'Press Start 2P', cursive;
+        font-size: 20px;
+        margin-top: 20px;
+        padding: 10px;
+        text-align: center;}
+    .login-container__data input{
+        border-radius: 20px;
+        box-shadow: var(--cero-divshadow);
+        background-color: rgba(44, 44, 44, 0.534);
+        margin-left: 25%;
+        width: 50%;
+        height: 25px;
+        margin-top: 5px;}
+    .login-container__data button{
+        background-color: rgba(73, 71, 73, 0.219);
+        width: 100px;
+        height: 40px;
+        border-radius: 50px;
+        margin-left:40%;
+        margin-top: 2%;}
+    /* Table-Page */
+    table{
+        width:100%;}
+    .tbl-content{
+        width: 60%;
+        height: 40%;
+        position: fixed;
+        margin-left: 10%;
+        overflow-x:auto;
+        margin-top: 0px;
+        background-color: #2C3845;
+        border: 1px solid rgba(255,255,255,0.3);
+        box-shadow: var(--cero-divshadow);}
+    .tbl-content thead{
+        border-radius: 50%;
+        box-shadow: var(--cero-3d-boxshadow);
+        background-color: rgba(19, 52, 197, 0.651)}
+    th{
+        position: sticky;
+        z-index: -1;
+        top: 0;
+        z-index: 10;
+        background-color: rgba(76, 92, 161, 0.651);
+        padding: 20px 15px;
+        text-align: center;
+        font-weight: 500;
+        font-size: 12px;
+        color: #fff;
+        text-transform: uppercase;}
+    td{
+        border-radius: 5%;
+        padding: 15px;
+        text-align: center;
+        vertical-align:middle;    
+        font-size: 12px;
+        color: #fff;
+        border-bottom: solid 1px rgba(255,255,255,0.1);}
+    .tbl-content::-webkit-scrollbar{
+        width: 1em;}
+    .tbl-content::-webkit-scrollbar-track{
+        box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);}
+    .tbl-content::-webkit-scrollbar-thumb{
+        background-color: var(--dos-secundario-transparente);
+        outline: 1px solid slategrey;}
+    .DnD{
+        width: 60%;
+        height: 20%;
+        background-color: rgba(77, 11, 11, 0.548);
+        position: fixed;
+        overflow-x: auto;
+        bottom: 2%;
+        margin-left: 9%;
+        margin-bottom: 2%;
+    }
+    /* Hover para Opciones de menu*/
+    .menu__btn:hover{
+        background-color: var(--cero-selection);}
+    .menu button:hover{
+        background-color:var(--cero-selection);         
+        opacity: .6;}
+    /* Hover para Login*/
+    .login__container input:hover{
+        background: rgb(255, 254, 254);} 
+    .login__container button:hover{
+        background-color: #10cf59a4;
+        width: 45%;
+        height: 5vh;
+        -ms-transform: translate(-55%, -50%);
+        transform: translate(-50%, 50%)}  
+    /* Hover para Tabla*/
+    .tbl-content tr:hover{
+        background-color:rgba(70, 103, 147, 0.522);
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);}
+    /* Hover de Cards */
+
+</style>
+
+<script>
+    const pasatiempos = [{'name': 'Cocinar','imagen': 'https://images.unsplash.com/photo-1528712306091-ed0763094c98?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1880&q=80'},
+                            {'name': 'Patinar', 'imagen': 'https://images.unsplash.com/photo-1616431627899-191cffb5fd5c?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80'},
+                            {'name': 'Leer', 'imagen': 'https://images.unsplash.com/photo-1546521343-4eb2c01aa44b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1875&q=80'},
+                            {'name': 'Video Juegos', 'imagen': 'https://images.unsplash.com/photo-1597982037940-66611bab09e0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1900&q=80'}];
+    const lenguajes = [{'name': 'Python','imagen': 'https://images.unsplash.com/photo-1609992130215-9c7ae91c64bb?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1951&q=80'},
+                            {'name': 'JavaScript', 'imagen': 'https://images.unsplash.com/photo-1527427337751-fdca2f128ce5?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80'},
+                            {'name': 'C#', 'imagen': 'https://images.unsplash.com/photo-1583903485817-d33bb5069eb7?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=375&q=80'},
+                            {'name': 'Kotlin', 'imagen': 'https://images.unsplash.com/photo-1588690154757-badf4644190f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=967&q=80'},
+                            {'name': 'CSS', 'imagen': 'https://images.unsplash.com/photo-1505685296765-3a2736de412f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1050&q=80'},
+                            {'name': 'TypeScript', 'imagen': 'https://images.unsplash.com/photo-1618335829737-2228915674e0?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80'}];
+    const frameworks = [{'name': 'Angular', 'imagen': 'https://images.unsplash.com/photo-1549108101-74503aa0b925?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=401&q=80'},
+                            {'name': 'WebApi', 'imagen': 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1050&q=80'},
+                            {'name': 'MySql', 'imagen': 'https://images.unsplash.com/photo-1489389944381-3471b5b30f04?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1050&q=80'},
+                            {'name': 'SQL Server', 'imagen': 'https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1050&q=80'},
+                            {'name': 'NodeJs', 'imagen': 'https://images.unsplash.com/photo-1619410283995-43d9134e7656?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80'},
+                            {'name': 'Android Studio', 'imagen': 'https://images.unsplash.com/photo-1604536264507-020ce894daf1?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=967&q=80'},
+                            ]
+    const headerTable = ["User Id", "Id", "Tile", "Body"];
+    const lateral = document.getElementById("body-principal")
+    var root = document.querySelector(':root');
+    window.onload = function(){
+        var menu = document
+        document.onclick = function(e){
+            // Ocultar dropdown con click en demas elementos
+            switch(e.target.id){
+                case "":
+                    document.getElementById("drp1").style.display = "none";
+                    document.getElementById("drp2").style.display = "none";
+                    document.getElementById("drp3").style.display = "none";
+                break;
+                case "btn-presentacion":
+                    document.getElementById("drp1").style.display = "none";
+                    document.getElementById("drp2").style.display = "none";
+                break;
+                case "body-principal":
+                    document.getElementById("drp1").style.display = "none";
+                    document.getElementById("drp2").style.display = "none";
+                    document.getElementById("drp3").style.display = "none";
+                    break;   
+                case "body-lateral":
+                    document.getElementById("drp1").style.display = "none";
+                    document.getElementById("drp2").style.display = "none";
+                    document.getElementById("drp3").style.display = "none";
+                    break;          
+            }            
+        }
+    }
+    /* Cards
+         Recibe url de imagen para background
+         Recibe titulo para card
+    */
+    function createCard(url_imagen, texto_titullo){
+        let card = document.createElement("a");
+        card.href = "#";
+        card.className = "card"
+
+        let img = document.createElement("div");
+        img.style.backgroundImage = `url(${url_imagen})`;
+        img.className = "card__background";
+
+        let content = document.createElement("div");
+        content.className = "card__content";
+
+        let tile = document.createElement("h1");
+        tile.textContent = texto_titullo;
+        tile.className = "card__categoria"
+
+        content.appendChild(tile);
+        card.appendChild(img);
+        card.appendChild(content);
+
+        return card;
+    }
+    /* Obtener presentacion
+         Utiliza un array
+         Div Anterior reciclar
+    */
+    function pagePresentacion(divAnterior){
+        let getElements= pasatiempos.map(function(element){return [element.name, element.imagen]});
+        borrarDiv(divAnterior);
+        // Crear div contenedor        
+        let container = document.createElement('div')
+        container.className = "reciclar"
+        container.id = "reciclar"
+        let card_grid = document.createElement("div");
+        card_grid.className = "card-grid"
+        // Crear Cards
+        getElements.forEach(element => {
+            let new_card = createCard(element[1], element[0]);
+            card_grid.appendChild(new_card);});
+        // Agregar a pantalla
+        container.appendChild(card_grid)
+        lateral.appendChild(container);
+    }
+    function pageLenguajes(divAnterior){
+        let getElements= lenguajes.map(function(element){return [element.name, element.imagen]});
+        borrarDiv(divAnterior);
+        // Crear div contenedor        
+        let container = document.createElement('div')
+        container.className = "reciclar"
+        container.id = "reciclar"
+        let card_grid = document.createElement("div");
+        card_grid.className = "card-grid"
+        // Crear Cards
+        getElements.forEach(element => {
+            let new_card = createCard(element[1], element[0]);
+            card_grid.appendChild(new_card);});
+        // Agregar a pantalla
+        container.appendChild(card_grid)
+        lateral.appendChild(container);
+    }
+    function pageLogin(divAnterior){
+        borrarDiv(divAnterior);
+
+        let page = document.createElement('div')
+        page.className = "reciclar"
+        page.id = "reciclar"
+        
+        let loginPage = document.createElement("div");
+        loginPage.className = "login-page"
+        loginPage.id = "login-page";
+
+        let logo = document.createElement("IMG");
+        logo.setAttribute("src", "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1c/DC_Comics_logo.png/600px-DC_Comics_logo.png");
+
+        let login = document.createElement("div");
+        login.className = "login";
+        login.id = "login";
+        
+        let alert = document.createElement("h1")
+        alert.id = "alert";
+        //alert.textContent = "Verificar correo";
+
+        let container = document.createElement("div");
+        container.className = "login__container";
+
+        let txtUser = document.createElement("h1");
+        let a = document.createElement("a");
+        txtUser.appendChild(a);
+        txtUser.textContent = "Usuario";
+
+        let inpUser = document.createElement("input");
+        inpUser.type = "email";
+        inpUser.name = "mail";
+        inpUser.id = "mail";
+        inpUser.placeholder = "uruario@dominio.mx";
+
+        let txtPassword = document.createElement("h1");
+        txtPassword.textContent = "Constrasena";
+
+        let inpPassword = document.createElement("input");
+        inpPassword.type = "password";
+        inpPassword.name = "password";
+        inpPassword.id = "password";
+
+        let btnSubmit = createButton("submit", "Login");
+
+        
+        container.appendChild(txtUser);
+        container.appendChild(inpUser);
+        container.appendChild(txtPassword);
+        container.appendChild(inpPassword);
+        container.appendChild(btnSubmit);
+
+        login.appendChild(alert);
+        login.appendChild(container);
+        
+        loginPage.appendChild(logo);
+        loginPage.appendChild(login);
+        
+
+        page.appendChild(loginPage);
+        lateral.appendChild(page);
+    }
+    function pageTable(divAnterior){}
+    function pageDnD(divAnterior){}
+    // DnD Funcion
+    var dragItem = null;
+    var div2 = document.getElementsByClassName("DnD")
+    function dNd(){
+        var th = document.getElementsByTagName('tr')         
+        console.log(th)
+        for (var i of th){
+            i.addEventListener('dragstart', dragStart);
+            i.addEventListener('dragend', dragEnd);
+        }
+        console.log(div2);
+        if(div2){
+            console.log("DIV 2")
+            div2[0].addEventListener('dragover', dragOver);
+            div2[0].addEventListener('dragenter', dragEnter);
+            div2[0].addEventListener('dragleave', dragLeave);
+            div2[0].addEventListener('dragover', Drop);
+        }
+    }
+    function Drop(){
+        console.log(dragItem)
+        div2[0].append(dragItem);
+    }
+    function dragOver(e){
+        e.preventDefault();
+    }
+    function dragEnter(e){
+        e.preventDefault();
+    }
+    function dragLeave(){}
+    function dragEnd(){
+        setTimeout(() => this.style.display = "block", 0);
+        dragItem = null;}
+    function dragStart(){
+        dragItem = this;
+        setTimeout(() => this.style.display = "none", 0);
+        }
+    // Crear Tabla
+    function callAPi(){
+        return fetch('https://jsonplaceholder.typicode.com/posts').
+                            then(response => response.json()).
+                            then(json => json);}
+    async function fetchTbody(){
+        try{           
+            let json = await callAPi();
+            console.log(json)
+            let tbody = document.createElement("tbody");
+            let data = json.map(function(element){return element;})
+            data.forEach(element => {
+            let info = addDataTbody(element);
+            tbody.appendChild(info);});
+
+            return tbody;
+        }
+        catch(e){console.error(e);}
+        
+    }
+    function createHeader(hTiles){
+        let thead = document.createElement("thead");
+        let tr = document.createElement("tr");
+        hTiles.forEach(element => {
+            let th = document.createElement("th");
+            th.textContent = element;
+            tr.appendChild(th);
+        });
+        thead.appendChild(tr);
+        return thead;
+    }
+    function addDataTbody(data){
+        let tr = document.createElement("tr");
+        tr.draggable = "true";
+        let userId = document.createElement("td");
+        userId.textContent = data.userId
+        let id = document.createElement("td");
+        id.textContent = data.id
+        let tile = document.createElement("td");
+        tile.textContent = data.title
+        let body = document.createElement("td");
+        body.textContent = data.body
+        tr.appendChild(userId);
+        tr.appendChild(id);
+        tr.appendChild(tile);
+        tr.appendChild(body);
+        return tr;
+    }
+    async function createTable(divAnterior){
+        borrarDiv(divAnterior);
+        let data_request = await fetchTbody();
+        let tHead = createHeader(headerTable)
+        let carrousel = document.createElement("div");
+        carrousel.className = "reciclar";
+        carrousel.id = "reciclar";
+
+        let page = document.createElement("div");
+        page.className = "ltable-page";
+
+        let tblHeader = document.createElement("div");
+        tblHeader.className = "tbl-header";
+
+        let tbl = document.createElement("table")
+        
+        
+
+        let tblContent = document.createElement("div");
+        tblContent.className = "tbl-content";
+
+        tbl.appendChild(tHead);
+        tbl.appendChild(data_request);
+        tblContent.appendChild(tbl);
+
+        page.appendChild(tblContent)       
+        carrousel.appendChild(page);
+        lateral.appendChild(carrousel);
+
+        let drop = document.createElement("div")
+        drop.className = "DnD";
+        drop.id = "DnD"
+        drop.draggable = "true";
+
+        lateral.appendChild(drop)
+        dNd();
+    }
+    // Muestra menu (por performance se deja en funcion y no en document.onclick)
+    function showDrop(id, btn) {
+        let actual = document.getElementById(id).style.display;
+        
+        if (actual == "flex"){
+            document.getElementById(id).style.display = "none";         
+            document.getElementById(id).style.position = "absolute";
+            document.getElementById(btn).style.backgroundColor = "initial";
+        }
+        else{
+            document.getElementById(id).style.display = "flex";
+            document.getElementById(id).style.position = "absolute";
+        }
+           
+    }
+    // Cambia el Tema de la pagina
+    function cambiarCssVariable(variable, nuevoValor) {
+        // Set the value of variable --blue to another value (in this case "lightblue")
+        root.style.setProperty(variable, nuevoValor);
+    }
+    function changueTheme(theme){    
+        document.getElementById("body-principal").style.backgroundColor = `var(--${theme}-secundario-transparente)`;
+        document.getElementById("body-lateral").style.backgroundColor = `var(--${theme}-principal-transparente)`; 
+        document.getElementById("menu-principal").style.backgroundColor = `var(--${theme}-principal)`;
+        document.getElementById("body").style.backgroundColor = `var(--${theme}-principal-transparente)`;
+        document.getElementById("body-lateral").style.boxShadow = `var(--${theme}-3defecto)`;
+        document.getElementById("body-principal").style.boxShadow = `var(--${theme}-3defecto)`;
+        document.getElementById("menu-principal").style.boxShadow = `var(--${theme}-3defecto)`;
+        document.getElementById("drp1").style.backgroundColor = `var(--${theme}-secundario)`;
+        document.getElementById("drp2").style.backgroundColor = `var(--${theme}-secundario)`;
+        document.getElementById("drp3").style.backgroundColor = `var(--${theme}-secundario)`;
+        cambiarCssVariable(`--cero-selection`, `var(--${theme}-seleccion)`)}
+    // Login
+    function showLogin(){
+        let btn = document.getElementById('login-activate');
+        let login = document.getElementById('login-container');
+
+        btn.style.display = 'none';
+        login.style.display = 'block'
+    }
+    // Elementos HTML
+    function createInput(clasName, type, hint){
+        let input = document.appendChild("input");
+        input.className = clasName;
+        return input;
+    }
+    function createImg(clasName){
+        let img = document.appendChild("IMG");
+        img.className = clasName;
+        return img;
+    }
+    function createH(clasName, id = "", txt = ""){
+        let h1 = document.appendChild("h1");
+        h1.className = clasName;
+        return h1;
+    }
+    function createContainer(clasName){
+        let container = document.createElement('div');
+        container.className = clasName;
+        return container
+    }
+    function createButton(clasName, txt){
+        let container = document.createElement("button");
+        container.className = clasName;
+        container.id = clasName;
+        container.textContent = txt;
+        return container;
+    }
+    function borrarDiv(clasNAme){
+        var elem = document.getElementById(clasNAme);
+        try{elem.remove();}
+        catch{}
+    }
+</script>

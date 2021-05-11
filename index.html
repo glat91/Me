@@ -66,8 +66,15 @@
         <div class="principal" id="body-principal">
             <h2 class="titulo" id="titulo">Login</h2>
             <div class="reciclar" id="reciclar">
-                <div class="chart">
-                    <canvas class="myChart" id="myChart"></canvas>
+                <div class="chart-page">
+                    <div class="chart-page__search">
+                        <h1>Medicion de CO del Aire en Monterrey</h1>
+                        <input type="date" name="date" id="date">
+                        <button>Agregar Datos</button>
+                    </div>
+                    <div class="chart">
+                        <canvas class="myChart" id="myChart"></canvas>
+                    </div>
                 </div>
             <button onclick="addInfo()"></button>
             </div>
@@ -76,16 +83,22 @@
 </html>
 
 <style>
+    .chart-page{
+        width: 100%;
+        height: 100%;
+    }
     .chart{
-        background: rgb(0, 61, 115, .9);
         margin: auto;
+        margin-top: 2%;
+        background: rgb(0, 61, 115, .9);
+
         width: 80%;
         height: 80%;
         border-radius: 10px;
         box-shadow:1rem 2rem 1.25rem 0 rgba(8, 8, 8, 0.5),
-							0 -0.25rem 1.5rem rgba(31, 205, 218, 1) inset,
-							0 0.75rem 0.5rem rgba(255,255,255, 0.4) inset,
-							0 0.25rem 0.5rem 0 rgb(22, 230, 245) inset;
+							0 -0.25rem 1.5rem rgb(0, 61, 115, .9) inset,
+							0 0.75rem 0.5rem rgba(3, 232, 248, 0.4) inset,
+							0 0.25rem 0.5rem 0 rgba(0, 46, 87, 0.9) inset;
         border: 2px solid rgb(0, 61, 115, .6);
     }
     :root {
@@ -591,14 +604,12 @@
     const tile = document.getElementById("titulo");
     var root = document.querySelector(':root');
     
+    //1606269600 Tue Nov 24 2020 19:00:00 GMT-0600 (hora estándar central)
     var x = new Date(1606223802 * 1000)
     console.log(x);
     var y = Math.round(x/1000);
     console.log(y);
 
-    function addInfo(){
-
-    }
     const labels = [
         'January',
         'February',
@@ -607,12 +618,32 @@
         'May',
         'June',
     ];
-    const data = {
-        labels: labels,
+    // Variables Para Chart
+    var fechas = []
+    var co = []
+    async function getData(){
+        let json = await callWeather();
+        return json;
+    }
+    function callWeather(){
+        return fetch('http://api.openweathermap.org/data/2.5/air_pollution/history?lat=25.6983320175888&lon=-100.23429833622565&start=1606223802&end=1606482999&appid=e361ab3a54ea18c0f8bf51870d225ea8').
+                            then(response => response.json()).
+                            then(json => json);}
+    async function addInfo(){
+        var data2 = await getData();
+        let variable = data2.list
+        
+        variable.forEach(elemento => {
+            fechas.push(`Hora ${new Date(elemento.dt * 1000).getHours()}`);
+            co.push(elemento.components.co)
+            console.log(`${elemento.components.co} fecha ${elemento.dt} calidad ${elemento.main.aqi}`)
+        })
+        const data = {
+        labels: fechas,
         datasets: [{
-            label: 'Contaminacion de Monterrey',
+            label: '2020',
             backgroundColor: 'rgb(113, 94, 78, .6)',
-            data: [36, 50, 150, 200, 190, 180, 200],
+            data: co,
             }]
     };
     const config = {
@@ -624,7 +655,7 @@
                     ticks: {
                         fontColor: "#E4EBF2",
                         fontSize: 10,
-                        stepSize: 50,
+                        stepSize: 500,
                         beginAtZero: true
                     }
                 }],
@@ -652,6 +683,12 @@
     };
     // Despues de crear los objetos crear Canvas
     var myChart = new Chart(document.getElementById('myChart'), config);
+    }
+    addInfo();
+
+    
+    
+
     
 
     window.onload = function(){

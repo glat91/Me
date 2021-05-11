@@ -286,7 +286,11 @@
         text-align: center;
         color: var(--dos-texto);}
     .reciclar{
-        padding: 8px;}
+        padding: 8px;
+        transition: transform 1s;}
+    .menu:hover .reciclar{
+        opacity: .0;
+    }
     /* Card*/
     .card-grid{
         display: grid;
@@ -423,6 +427,7 @@
         width: 80%;
         height: 55vh;   
         display: none;
+        
         box-shadow: var(--cero-3d-boxshadow);}
     .login-container__data{
         width: 60%;
@@ -619,11 +624,11 @@ var myChart = new Chart(
                     document.getElementById("drp1").style.display = "none";
                     document.getElementById("drp2").style.display = "none";
                     document.getElementById("drp3").style.display = "none";
-                break;
+                    break;
                 case "btn-presentacion":
                     document.getElementById("drp1").style.display = "none";
                     document.getElementById("drp2").style.display = "none";
-                break;
+                    break;
                 case "body-principal":
                     document.getElementById("drp1").style.display = "none";
                     document.getElementById("drp2").style.display = "none";
@@ -633,7 +638,17 @@ var myChart = new Chart(
                     document.getElementById("drp1").style.display = "none";
                     document.getElementById("drp2").style.display = "none";
                     document.getElementById("drp3").style.display = "none";
-                    break;          
+                    break;
+                case "myChart":
+                    document.getElementById("drp1").style.display = "none";
+                    document.getElementById("drp2").style.display = "none";
+                    document.getElementById("drp3").style.display = "none";
+                    break;
+                case "reciclar":
+                    document.getElementById("drp1").style.display = "none";
+                    document.getElementById("drp2").style.display = "none";
+                    document.getElementById("drp3").style.display = "none";
+                    break;
             }            
         }
     }

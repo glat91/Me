@@ -630,9 +630,10 @@
         let longitude = "-100.23429833622565";
         let key = "e361ab3a54ea18c0f8bf51870d225ea8"
         let url = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&start=1606223802&end=1606482999&appid=${key}`;
+        console.log(url)
         return fetch(url).
-                            then(response => response.json()).
-                            then(json => json);}
+                    then(response => response.json()).
+                    then(json => json);}
     async function addInfo(){
         var data2 = await getData();
         let variable = data2.list;

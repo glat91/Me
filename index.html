@@ -27,17 +27,17 @@
                     <ul class="menu__dropdown" id="drp2">
                         <button onclick="pageLogin('reciclar')">Login CSS</button>
                         <button onclick="createTable('reciclar')">Peticion WebApi</button>
-                        <button onclick="pageDnD('reciclar')">Charts</button>
-                        <button>Carrousel CSS</button> 
-                        <button>DashBoard</button>                  
+                        <button onclick="pageCharts('reciclar')">Charts P</button>
+                        <button>Carrousel TODO</button> 
+                        <button>DashBoard TODO</button>                  
                     </ul>
                 </div>
                 <div class="theme">
                     <div class="theme__menu" id="theme">
                         <button id="btn-theme" onclick="showDrop('drp3', 'btn-theme')"><img src="https://image.flaticon.com/icons/png/512/69/69524.png" style="width: 25px; height: 15px;">Cambiar Tema</button>
                         <ul class="theme__dropdown" id="drp3">
-                            <button id="btn-uno"onclick="changueTheme('uno')">AOT</button>
-                            <button id="btn-dos" onclick="changueTheme('dos')">MLP</button>
+                            <button id="btn-uno"onclick="changueTheme('uno')">Natural</button>
+                            <button id="btn-dos" onclick="changueTheme('dos')">Pink</button>
                             <button id="btn-tres" onclick="changueTheme('tres')">Mono</button> 
                             <button id="btn-tres" onclick="changueTheme('cuatro')">Vintage</button>                   
                         </ul>
@@ -129,14 +129,14 @@
 							0 0.75rem 0.5rem rgba(255,255,255, 0.4) inset,
 							0 0.25rem 0.5rem 0 rgba(81, 82, 92, 1) inset;
                             
-        --cuatro-principal: rgb(224, 196, 214);
-        --cuatro-secundario: rgb(216, 206, 186, .5);
-        --cuatro-extra: rgba(81, 82, 92, 1);
-        --cuatro-seleccion: rgb(27, 56, 61);
+        --cuatro-principal: rgb(188, 26, 37, .5);
+        --cuatro-secundario: #777CA8;
+        --cuatro-extra: #EE6C81;
+        --cuatro-seleccion: #F092A5;
         --cuatro-texto: #FFFFFF;
         --cuatro-texto-secundario: #FFFFFF;
-        --cuatro-principal-transparente: rgba(6, 6, 8, 0.3);
-        --cuatro-secundario-transparente: rgba(31, 30, 32, 0.3);
+        --cuatro-principal-transparente: rgb(187, 25, 36, .3);
+        --cuatro-secundario-transparente: rgb(119, 124, 168, .3);
         --cuatro-3defecto:0 1rem 1.25rem 0 rgba(22,75,195,0.50),
 							0 -0.25rem 1.5rem rgba(6, 6, 8, 1) inset,
 							0 0.75rem 0.5rem rgba(255,255,255, 0.4) inset,
@@ -566,6 +566,8 @@
                             {'name': 'SQL Server', 'imagen': 'https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1050&q=80'},
                             {'name': 'NodeJs', 'imagen': 'https://images.unsplash.com/photo-1619410283995-43d9134e7656?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80'},
                             {'name': 'Android Studio', 'imagen': 'https://images.unsplash.com/photo-1604536264507-020ce894daf1?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=967&q=80'},
+                            {'name': 'Selenium', 'imagen': 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80'},
+                            {'name': 'Scrapping Data', 'imagen': 'https://images.unsplash.com/photo-1569605803663-e9337d901ff9?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1949&q=80'},
                             ]
     const headerTable = ["User Id", "Id", "Tile", "Body"];
     

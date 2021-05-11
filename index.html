@@ -626,7 +626,11 @@
         return json;
     }
     function callWeather(){
-        return fetch('https://api.openweathermap.org/data/2.5/air_pollution/history?lat=25.6983320175888&lon=-100.23429833622565&start=1606223802&end=1606482999&appid=e361ab3a54ea18c0f8bf51870d225ea8').
+        let latitude = "25.6983320175888";
+        let longitude = "-100.23429833622565";
+        let key = "e361ab3a54ea18c0f8bf51870d225ea8"
+        let url = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&start=1606223802&end=1606482999&appid=${key}`;
+        return fetch(url).
                             then(response => response.json()).
                             then(json => json);}
     async function addInfo(){

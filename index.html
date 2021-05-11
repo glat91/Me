@@ -70,7 +70,7 @@
                     <div class="chart-page__search">
                         <h1>Medicion de CO del Aire en Monterrey</h1>
                         <input type="date" name="date" id="date">
-                        <button>Agregar Datos</button>
+                        <button onclick="addInfo()">Agregar Datos</button>
                     </div>
                     <div class="chart">
                         <canvas class="myChart" id="myChart"></canvas>
@@ -603,99 +603,6 @@
     const lateral = document.getElementById("body-principal")
     const tile = document.getElementById("titulo");
     var root = document.querySelector(':root');
-    
-    //1606269600 Tue Nov 24 2020 19:00:00 GMT-0600 (hora estándar central)
-    var x = new Date(1606223802 * 1000)
-    console.log(x);
-    var y = Math.round(x/1000);
-    console.log(y);
-
-    const labels = [
-        'January',
-        'February',
-        'March',
-        'April',
-        'May',
-        'June',
-    ];
-    // Variables Para Chart
-    var fechas = [];
-    var co = [];
-    async function getData(){
-        let json = await callWeather();
-        return json;
-    }
-    function callWeather(){
-        let latitude = "25.6983320175888";
-        let longitude = "-100.23429833622565";
-        let key = "e361ab3a54ea18c0f8bf51870d225ea8"
-        let url = `https://api.openweathermap.org/data/2.5/air_pollution/history?lat=${latitude}&lon=${longitude}&start=1606223802&end=1606482999&appid=${key}`;
-        console.log(url)
-        return fetch(url).
-                    then(response => response.json()).
-                    then(json => json);}
-    async function addInfo(){
-        var data2 = await getData();
-        let variable = data2.list;
-        
-        variable.forEach(elemento => {
-            fechas.push(`Hora ${new Date(elemento.dt * 1000).getHours()}`);
-            co.push(elemento.components.co);
-            console.log(`${elemento.components.co} fecha ${elemento.dt} calidad ${elemento.main.aqi}`);
-        });
-        const data = {
-        labels: fechas,
-        datasets: [{
-            label: '2020',
-            backgroundColor: 'rgb(113, 94, 78, .6)',
-            data: co,
-            }]
-    };
-    const config = {
-    type: 'line',
-    data: data,
-    options: {
-        scales: {
-                yAxes: [{
-                    ticks: {
-                        fontColor: "#E4EBF2",
-                        fontSize: 10,
-                        stepSize: 500,
-                        beginAtZero: true
-                    }
-                }],
-                xAxes: [{
-                    ticks: {
-                        fontColor: "#E4EBF2",
-                        fontSize: 14,
-                        stepSize: 1,
-                        beginAtZero: true
-                    }
-                }]
-            },
-        legend: {
-                labels: {
-                    fontColor: "#E4EBF2",
-                    fontSize: 18
-                }
-            },
-        elements: {
-            line: {
-                borderWidth: 3
-                }
-            }
-        },
-    };
-    // Despues de crear los objetos crear Canvas
-    var myChart = new Chart(document.getElementById('myChart'), config);
-    }
-    addInfo();
-
-    
-    
-
-    
-
     window.onload = function(){
         var menu = document
         document.onclick = function(e){
@@ -1008,6 +915,84 @@
 
         let logo = document.createElement("IMG");
         logo.setAttribute("src", "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1c/DC_Comics_logo.png/600px-DC_Comics_logo.png");
+    }
+        /*Chart Page
+        Funcion asyncrona para desplegar chart empieza en call Weather
+    */
+    var co = [];
+    async function getData(year, month, day){
+        let start = Math.round( new Date(Date.UTC(year, month, day, 0, 0, 0, 0) / 1000));
+        let end = Math.round( new Date(Date.UTC(year, month, day, 23, 59, 59, 30) / 1000));
+        let json = await callWeather(start, end);
+        console.log()
+        return json;
+    }
+    function callWeather(start, end){
+        let latitude = "25.6983320175888";
+        let longitude = "-100.23429833622565";
+
+        let key = "e361ab3a54ea18c0f8bf51870d225ea8"
+        let url = `https://api.openweathermap.org/data/2.5/air_pollution/history?lat=${latitude}&lon=${longitude}&start=${start}&end=${end}&appid=${key}`;
+        console.log(url)
+        
+        return fetch(url).
+                    then(response => response.json()).
+                    then(json => json);}                 
+    async function addInfo(){
+        let fecha = document.getElementById("date").value;
+        let split = fecha.split("-")
+
+        var data2 = await getData(split[0], split[1], split[2]);
+        let variable = data2.list;
+        variable.forEach(elemento => {
+            co.push(elemento.components.co);
+            console.log(`Hora ${new Date(elemento.dt * 1000)}`);
+        });
+        const data = {
+        labels: ['01:00', '02:00', '03:00', '04:00', '50:00', '06:00', '07:00', '08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '19:00', '19:00', '21:00', '21:00', '22:00', '23:00', '24:00'],
+        datasets: [{
+            label: '2020',
+            backgroundColor: 'rgb(113, 94, 78, .6)',
+            data: co,
+            }]
+    };
+        const config = {
+            type: 'line',
+            data: data,
+            options: {
+                scales: {
+                        yAxes: [{
+                            ticks: {
+                                fontColor: "#E4EBF2",
+                                fontSize: 10,
+                                stepSize: 500,
+                                beginAtZero: true
+                            }
+                        }],
+                        xAxes: [{
+                            ticks: {
+                                fontColor: "#E4EBF2",
+                                fontSize: 14,
+                                stepSize: 1,
+                                beginAtZero: true
+                            }
+                        }]
+                    },
+                legend: {
+                        labels: {
+                            fontColor: "#E4EBF2",
+                            fontSize: 18
+                        }
+                    },
+                elements: {
+                    line: {
+                        borderWidth: 3
+                        }
+                    }
+            },
+        };
+        // Despues de crear los objetos crear Canvas
+        var myChart = new Chart(document.getElementById('myChart'), config);
     }
     // Elementos HTML
     function createInput(type, id, hint){

@@ -195,6 +195,7 @@
         align-items: center;
         z-index: 1;}
     .menu__project ul, .menu__home ul, .theme__menu ul{
+        border-radius: 20px;
         background-color: none;
         position: absolute;
         margin-top: 10px;
@@ -649,7 +650,7 @@
     function pageTecnologias(divAnterior){
         let getElements= tecnologias.map(function(element){return [element.name, element.imagen]});
         borrarDiv(divAnterior);
-        tile.textContent = "Lenguajes de Programacion";
+        tile.textContent = "Experiencia en Tecnologias";
         // Crear div contenedor        
         let container = document.createElement('div')
         container.className = "reciclar"

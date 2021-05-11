@@ -23,7 +23,7 @@
                 <div class="menu__project">
                     <button id="btn-project" onclick="showDrop('drp2', 'btn-project')"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/Add_document_icon_%28the_Noun_Project_27896%29.svg/1024px-Add_document_icon_%28the_Noun_Project_27896%29.svg.png" style="width: 25px; height: 15px;">Samples</button>
                     <ul class="menu__dropdown" id="drp2">
-                        <button onclick="createLogin('reciclar')">Login CSS</button>
+                        <button onclick="loginNew('reciclar')">Login CSS</button>
                         <button onclick="createTable('reciclar')">Peticion WebApi</button>
                         <button onclick="pageDnD('reciclar')">Mover elementos</button>
                         <button>Cards CSS</button> 
@@ -413,7 +413,7 @@
         width: 80%;
         height: 55vh;   
         display: none;
-        box-shadow: var(--cero-3d-boxshadow)  }
+        box-shadow: var(--cero-3d-boxshadow);}
     .login-container__data{
         width: 60%;
         height: 40vh;
@@ -437,6 +437,8 @@
         text-align: center;}
     .login-container__data input{
         border-radius: 20px;
+        color: black;
+        padding: 2px;
         box-shadow: var(--cero-divshadow);
         background-color: rgba(44, 44, 44, 0.534);
         margin-left: 25%;
@@ -524,7 +526,9 @@
         background-color:rgba(70, 103, 147, 0.522);
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);}
     /* Hover de Cards */
-
+    .login-container__data input:hover{
+        background-color: #fff;
+    }
 </style>
 
 <script>
@@ -646,6 +650,8 @@
     function loginNew(divAnterior){
         borrarDiv(divAnterior);
         tile.textContent = "Login Presentacion";
+
+        createLogin();
     }
     function pageLogin(divAnterior){
         borrarDiv(divAnterior);
@@ -879,25 +885,42 @@
         btn.style.display = 'none';
         login.style.display = 'block'
     }
-    function createLogin(divAnterior){
-        borrarDiv(divAnterior);
+    function createLogin(){
         let reciclar = createDiv('reciclar', 'reciclar');
         let login_page = createDiv('login-page');
-        let login_page_btn = createDiv('login-page__btn');
-        let start = createButton("", 'showLogin()');
+        let login_page_btn = createDiv('login-page__btn', "login-activate");
+        let start = createButton('showLogin()');
         let start_img = createImg("", "https://github.com/glat91/Me/blob/main/iniciar-sesion.png?raw=true");
+        
+        let login_container = createDiv("login-container", "login-container");
+        let container_data = createDiv("login-container__data");
+        let txtUser = createH1("Usuario");
+        let txtPassword = createH1("Contraseña");
+        let inpUser = createInput('email', 'email', 'mail@dominio.com');
+        let inpPassword = createInput('password', 'password', "***********");
+        let submit = createButton("", "submit")
         // primera parte
         start.appendChild(start_img);
         login_page_btn.appendChild(start);
         login_page.appendChild(login_page_btn);
-        
+        // segunda parte
+        container_data.appendChild(txtUser);
+        container_data.appendChild(inpUser);
+        container_data.appendChild(txtPassword);
+        container_data.appendChild(inpPassword);
+        container_data.appendChild(submit);
+        login_container.appendChild(container_data)
+        login_page.appendChild(login_container);
+        // Union Final
         reciclar.appendChild(login_page);
         lateral.appendChild(reciclar)
     }
     // Elementos HTML
-    function createInput(clasName, type, hint){
-        let input = document.appendChild("input");
-        input.className = clasName;
+    function createInput(type, id, hint){
+        let input = document.createElement("input");
+        input.type = type;
+        input.placeholder = hint;
+        input.id = id;
         return input;
     }
     function createImg(clasName, src){
@@ -906,9 +929,10 @@
         container.setAttribute("src", src)
         return container;
     }
-    function createH(clasName, id="", txt=""){
-        let h1 = document.appendChild("h1");
+    function createH1(txt, clasName=""){
+        let h1 = document.createElement("h1");
         h1.className = clasName;
+        h1.textContent = txt
         return h1;
     }
     function createDiv(clasName, id=""){
@@ -917,12 +941,11 @@
         if(id !== ""){container.id=id;}
         return container
     }
-    function createButton(clasName, onclick, txt=''){
+    function createButton(click, txt='', clasName=""){
         let container = document.createElement("button");
-        container.className = clasName;
-        container.id = clasName;
         container.textContent = txt;
-        container.onclick = onclick;
+        container.setAttribute("onclick", click)
+        if(clasName !== ""){container.className = clasName;}
         return container;
     }
     function borrarDiv(clasNAme){

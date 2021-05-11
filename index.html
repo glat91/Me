@@ -619,25 +619,25 @@
         'June',
     ];
     // Variables Para Chart
-    var fechas = []
-    var co = []
+    var fechas = [];
+    var co = [];
     async function getData(){
         let json = await callWeather();
         return json;
     }
     function callWeather(){
-        return fetch('http://api.openweathermap.org/data/2.5/air_pollution/history?lat=25.6983320175888&lon=-100.23429833622565&start=1606223802&end=1606482999&appid=e361ab3a54ea18c0f8bf51870d225ea8').
+        return fetch('https://api.openweathermap.org/data/2.5/air_pollution/history?lat=25.6983320175888&lon=-100.23429833622565&start=1606223802&end=1606482999&appid=e361ab3a54ea18c0f8bf51870d225ea8').
                             then(response => response.json()).
                             then(json => json);}
     async function addInfo(){
         var data2 = await getData();
-        let variable = data2.list
+        let variable = data2.list;
         
         variable.forEach(elemento => {
             fechas.push(`Hora ${new Date(elemento.dt * 1000).getHours()}`);
-            co.push(elemento.components.co)
-            console.log(`${elemento.components.co} fecha ${elemento.dt} calidad ${elemento.main.aqi}`)
-        })
+            co.push(elemento.components.co);
+            console.log(`${elemento.components.co} fecha ${elemento.dt} calidad ${elemento.main.aqi}`);
+        });
         const data = {
         labels: fechas,
         datasets: [{

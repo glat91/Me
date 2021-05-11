@@ -66,16 +66,27 @@
         <div class="principal" id="body-principal">
             <h2 class="titulo" id="titulo">Login</h2>
             <div class="reciclar" id="reciclar">
-                <canvas class="myChart" id="myChart"></canvas>
+                <div class="chart">
+                    <canvas class="myChart" id="myChart"></canvas>
+                </div>
+            <button onclick="addInfo()"></button>
             </div>
         </div> 
     </body>
 </html>
 
 <style>
-    .myChart{
-        width: 40px;
-        height: 400px;
+    .chart{
+        background: rgb(0, 61, 115, .9);
+        margin: auto;
+        width: 80%;
+        height: 80%;
+        border-radius: 10px;
+        box-shadow:1rem 2rem 1.25rem 0 rgba(8, 8, 8, 0.5),
+							0 -0.25rem 1.5rem rgba(31, 205, 218, 1) inset,
+							0 0.75rem 0.5rem rgba(255,255,255, 0.4) inset,
+							0 0.25rem 0.5rem 0 rgb(22, 230, 245) inset;
+        border: 2px solid rgb(0, 61, 115, .6);
     }
     :root {
         --cero-3d-efect:0 1rem 1.25rem 0 rgba(22,75,195,0.50),
@@ -580,39 +591,67 @@
     const tile = document.getElementById("titulo");
     var root = document.querySelector(':root');
     
+    var x = new Date(1606223802 * 1000)
+    console.log(x);
+    var y = Math.round(x/1000);
+    console.log(y);
 
-    const labels = [
-  'January',
-  'February',
-  'March',
-  'April',
-  'May',
-  'June',
-];
-const data = {
-  labels: labels,
-  datasets: [{
-    label: 'My First dataset',
-    backgroundColor: 'rgb(255, 99, 132)',
-    borderColor: 'rgb(255, 99, 132)',
-    data: [0, 10, 5, 2, 20, 30, 45],
-  }]
-};
-const config = {
-  type: 'radar',
-  data: data,
-  options: {
-    elements: {
-      line: {
-        borderWidth: 3
-      }
+    function addInfo(){
+
     }
-  },
-};
-var myChart = new Chart(
-    document.getElementById('myChart'),
-    config
-  );
+    const labels = [
+        'January',
+        'February',
+        'March',
+        'April',
+        'May',
+        'June',
+    ];
+    const data = {
+        labels: labels,
+        datasets: [{
+            label: 'Contaminacion de Monterrey',
+            backgroundColor: 'rgb(113, 94, 78, .6)',
+            data: [36, 50, 150, 200, 190, 180, 200],
+            }]
+    };
+    const config = {
+    type: 'line',
+    data: data,
+    options: {
+        scales: {
+                yAxes: [{
+                    ticks: {
+                        fontColor: "#E4EBF2",
+                        fontSize: 10,
+                        stepSize: 50,
+                        beginAtZero: true
+                    }
+                }],
+                xAxes: [{
+                    ticks: {
+                        fontColor: "#E4EBF2",
+                        fontSize: 14,
+                        stepSize: 1,
+                        beginAtZero: true
+                    }
+                }]
+            },
+        legend: {
+                labels: {
+                    fontColor: "#E4EBF2",
+                    fontSize: 18
+                }
+            },
+        elements: {
+            line: {
+                borderWidth: 3
+                }
+            }
+        },
+    };
+    // Despues de crear los objetos crear Canvas
+    var myChart = new Chart(document.getElementById('myChart'), config);
     
 
     window.onload = function(){

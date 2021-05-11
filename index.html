@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="viewport" content="heigth=device-heigth, initial-scale=1.0">
+<link rel="stylesheet" href="https://www.chartjs.org/dist/master/chart.min.js">
 <html lag="en">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.js"></script>
     <title>
         Jose Manuel Uribe Almaguer v.1
     </title>
@@ -24,7 +26,7 @@
                     <button id="btn-project" onclick="showDrop('drp2', 'btn-project')"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/Add_document_icon_%28the_Noun_Project_27896%29.svg/1024px-Add_document_icon_%28the_Noun_Project_27896%29.svg.png" style="width: 25px; height: 15px;">Samples</button>
                     <ul class="menu__dropdown" id="drp2">
                         <button onclick="pageLogin('reciclar')">Login CSS</button>
-                        <button onclick="createTable('reciclar')">Peticion WebApi y Arrastrar a tabla</button>
+                        <button onclick="createTable('reciclar')">Peticion WebApi</button>
                         <button onclick="pageDnD('reciclar')">Carrusel Css</button>
                         <button>Cards CSS</button> 
                         <button>DashBoard</button>                  
@@ -63,26 +65,17 @@
         <div class="principal" id="body-principal">
             <h2 class="titulo" id="titulo">Login</h2>
             <div class="reciclar" id="reciclar">
-                <div class="login-page">
-                    <div class="login-page__btn" id="login-activate">                        
-                        <button onclick="showLogin()"><img src="https://github.com/glat91/Me/blob/main/iniciar-sesion.png?raw=true" alt=""></button>
-                    </div>                    
-                    <div class="login-container" id="login-container">
-                        <div class="login-container__data">                            
-                            <h1>Usuario</h1>
-                            <input type="email" name="email" id="email">
-                            <h1>Constrasena</h1>
-                            <input type="password" name="password" id="password">
-                            <button>Submit</button>
-                        </div>
-                    </div>
-                </div>
+                <canvas class="myChart" id="myChart"></canvas>
             </div>
         </div> 
     </body>
 </html>
 
 <style>
+    .myChart{
+        width: 40px;
+        height: 400px;
+    }
     :root {
         --cero-3d-efect:0 1rem 1.25rem 0 rgba(22,75,195,0.50),
 							0 -0.25rem 1.5rem rgba(110, 15, 155, 1) inset,
@@ -277,6 +270,8 @@
         text-align: center;
         color: var(--dos-texto);}
     .reciclar{
+        width: 400px;
+        height: 400px;
         padding: 8px;}
     /* Card*/
     .card-grid{
@@ -514,6 +509,8 @@
         overflow-x:auto;
         background-color: rgba(77, 11, 11, 0.548);
 }
+    /* Charts */
+
     /* Hover para Opciones de menu*/
     .menu__btn:hover{
         background-color: var(--cero-selection);}
@@ -562,6 +559,41 @@
     const tile = document.getElementById("titulo");
     var root = document.querySelector(':root');
     
+
+    const labels = [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+];
+const data = {
+  labels: labels,
+  datasets: [{
+    label: 'My First dataset',
+    backgroundColor: 'rgb(255, 99, 132)',
+    borderColor: 'rgb(255, 99, 132)',
+    data: [0, 10, 5, 2, 20, 30, 45],
+  }]
+};
+const config = {
+  type: 'radar',
+  data: data,
+  options: {
+    elements: {
+      line: {
+        borderWidth: 3
+      }
+    }
+  },
+};
+var myChart = new Chart(
+    document.getElementById('myChart'),
+    config
+  );
+    
+
     window.onload = function(){
         var menu = document
         document.onclick = function(e){

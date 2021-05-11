@@ -3,7 +3,7 @@
 <meta name="viewport" content="heigth=device-heigth, initial-scale=1.0">
 <html lag="en">
     <title>
-        Jose Manuel Uribe Almaguer
+        Jose Manuel Uribe Almaguer v.1
     </title>
     <header>
         <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -24,8 +24,8 @@
                     <button id="btn-project" onclick="showDrop('drp2', 'btn-project')"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/Add_document_icon_%28the_Noun_Project_27896%29.svg/1024px-Add_document_icon_%28the_Noun_Project_27896%29.svg.png" style="width: 25px; height: 15px;">Samples</button>
                     <ul class="menu__dropdown" id="drp2">
                         <button onclick="pageLogin('reciclar')">Login CSS</button>
-                        <button onclick="createTable('reciclar')">Peticion WebApi</button>
-                        <button onclick="pageDnD('reciclar')">Mover elementos</button>
+                        <button onclick="createTable('reciclar')">Peticion WebApi y Arrastrar a tabla</button>
+                        <button onclick="pageDnD('reciclar')">Carrusel Css</button>
                         <button>Cards CSS</button> 
                         <button>DashBoard</button>                  
                     </ul>
@@ -143,6 +143,9 @@
         /*background-color: var(--dos-principal-transparente);*/
         flex-wrap: wrap;
         background-image: url('https://images.unsplash.com/photo-1458682625221-3a45f8a844c7?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1867&q=80');
+
+        background-size: cover;
+        background-position: center;
         /*background-image:linear-gradient(to left, var(--dos-extra) 66%, var(--dos-secundario));*/}
     /* Menu*/
     .menu{
@@ -274,8 +277,7 @@
         text-align: center;
         color: var(--dos-texto);}
     .reciclar{
-        padding: 8px;
-    }
+        padding: 8px;}
     /* Card*/
     .card-grid{
         display: grid;
@@ -392,8 +394,7 @@
         background-size: cover;
         display: grid;
         margin-top: 1%;
-        margin-left:10%;}
-    
+        margin-left:10%;}    
     /*Aqui hcer display block*/
     .login-page__btn{
         margin: 0;
@@ -406,8 +407,7 @@
         opacity: .3;
         transition: 2s;}
     .login-page__btn button{
-        background: none;
-    }
+        background: none;}
     .login-container{
         margin-top: 10%;
         margin-left: 10%;
@@ -457,9 +457,8 @@
     table{
         width:100%;}
     .tbl-content{
-        width: 60%;
-        height: 40%;
-        position: fixed;
+        width: 120vh;
+        height: 45vh;
         margin-left: 10%;
         overflow-x:auto;
         margin-top: 20px;
@@ -497,16 +496,24 @@
     .tbl-content::-webkit-scrollbar-thumb{
         background-color: var(--dos-secundario-transparente);
         outline: 1px solid slategrey;}
-    .DnD{
-        width: 60%;
-        height: 20%;
-        background-color: rgba(77, 11, 11, 0.548);
-        position: fixed;
-        overflow-x: auto;
-        bottom: 2%;
-        margin-left: 9%;
-        margin-bottom: 2%;
+    .page-DnD{
+        margin-left: 10%;
+        overflow-x:auto;
+        margin-top: 5%;
+        width: 120vh;
+        height: 40vh;
     }
+    .page-DnD h1{
+        color: var(--dos-texto);
+        text-align:unset;
+        margin-left: 15%;
+    }
+    .DnD{
+        width: 120vh;
+        height: 20vh;
+        overflow-x:auto;
+        background-color: rgba(77, 11, 11, 0.548);
+}
     /* Hover para Opciones de menu*/
     .menu__btn:hover{
         background-color: var(--cero-selection);}
@@ -528,8 +535,7 @@
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);}
     /* Hover de Cards */
     .login-container__data input:hover{
-        background-color: #fff;
-    }
+        background-color: #fff;}
 </style>
 
 <script>
@@ -551,9 +557,11 @@
                             {'name': 'Android Studio', 'imagen': 'https://images.unsplash.com/photo-1604536264507-020ce894daf1?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=967&q=80'},
                             ]
     const headerTable = ["User Id", "Id", "Tile", "Body"];
+    
     const lateral = document.getElementById("body-principal")
     const tile = document.getElementById("titulo");
     var root = document.querySelector(':root');
+    
     window.onload = function(){
         var menu = document
         document.onclick = function(e){
@@ -607,9 +615,8 @@
 
         return card;
     }
-    /* Obtener presentacion
-         Utiliza un array
-         Div Anterior reciclar
+    /* Obtener Paginas         
+         Div Anterior reciclar es necesario
     */
     function pagePresentacion(divAnterior){
         let getElements= pasatiempos.map(function(element){return [element.name, element.imagen]});
@@ -759,49 +766,37 @@
     }
     async function createTable(divAnterior){
         borrarDiv(divAnterior);
-        tile.textContent = "Peticion Asyncrona JavaScript"
+        tile.textContent = "Peticion Asyncrona JavaScript"       
         let data_request = await fetchTbody();
         let tHead = createHeader(headerTable)
-        let carrousel = document.createElement("div");
-        carrousel.className = "reciclar";
-        carrousel.id = "reciclar";
-
-        let page = document.createElement("div");
-        page.className = "ltable-page";
-
-        let tblHeader = document.createElement("div");
-        tblHeader.className = "tbl-header";
-
-        let tbl = document.createElement("table")
-        
-        
-
-        let tblContent = document.createElement("div");
-        tblContent.className = "tbl-content";
-
+        // Tabla Principal
+        let reciclar = createDiv("reciclar","reciclar");
+        let page = createDiv("ltable-page");
+        let tblHeader = createDiv("tbl-header");
+        let tbl = document.createElement("table");      
+        let tblContent = createDiv("tbl-content");
+        // Tabla Drop
+        let pageDnD = createDiv("page-DnD", "DnD");
+        let txtExplainExplain = createH1("Arrastrar elementos de la tabla aqui");
+        let drop = createDiv("DnD","DnD")
+        drop.draggable = "true";   
+        // Append Elementos    
         tbl.appendChild(tHead);
         tbl.appendChild(data_request);
         tblContent.appendChild(tbl);
+        page.appendChild(tblContent);
 
-        page.appendChild(tblContent)       
-        carrousel.appendChild(page);
-        lateral.appendChild(carrousel);
+        pageDnD.appendChild(txtExplainExplain);
+        pageDnD.appendChild(drop);
+        reciclar.appendChild(page);
+        reciclar.appendChild(pageDnD);
 
-        // TODO Arreglar tabla y agregar div y h1 para explicar Drag n Drop
-        let newh1 = document.createElement("h1");
-        newh1.textContent = "Arrastrar elementos de la tabla aqui"
-        let drop = document.createElement("div")
-        drop.className = "DnD";
-        drop.id = "DnD"
-        drop.draggable = "true";
-
-        lateral.appendChild(drop)
+        lateral.appendChild(reciclar);
         dNd();
     }
     // Muestra menu (por performance se deja en funcion y no en document.onclick)
     function showDrop(id, btn) {
-        let actual = document.getElementById(id).style.display;
-        
+        let actual = document.getElementById(id).style.display;      
         if (actual == "flex"){
             document.getElementById(id).style.display = "none";         
             document.getElementById(id).style.position = "absolute";
@@ -810,8 +805,7 @@
         else{
             document.getElementById(id).style.display = "flex";
             document.getElementById(id).style.position = "absolute";
-        }
-           
+        }           
     }
     // Cambia el Tema de la pagina
     function cambiarCssVariable(variable, nuevoValor) {

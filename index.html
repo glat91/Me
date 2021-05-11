@@ -27,8 +27,8 @@
                     <ul class="menu__dropdown" id="drp2">
                         <button onclick="pageLogin('reciclar')">Login CSS</button>
                         <button onclick="createTable('reciclar')">Peticion WebApi</button>
-                        <button onclick="pageDnD('reciclar')">Carrusel Css</button>
-                        <button>Cards CSS</button> 
+                        <button onclick="pageDnD('reciclar')">Charts</button>
+                        <button>Carrousel CSS</button> 
                         <button>DashBoard</button>                  
                     </ul>
                 </div>
@@ -38,7 +38,8 @@
                         <ul class="theme__dropdown" id="drp3">
                             <button id="btn-uno"onclick="changueTheme('uno')">AOT</button>
                             <button id="btn-dos" onclick="changueTheme('dos')">MLP</button>
-                            <button id="btn-tres" onclick="changueTheme('tres')">Mono</button>                    
+                            <button id="btn-tres" onclick="changueTheme('tres')">Mono</button> 
+                            <button id="btn-tres" onclick="changueTheme('cuatro')">Vintage</button>                   
                         </ul>
                     </div>
                 </div>
@@ -126,6 +127,19 @@
         --tres-3defecto:0 1rem 1.25rem 0 rgba(22,75,195,0.50),
 							0 -0.25rem 1.5rem rgba(6, 6, 8, 1) inset,
 							0 0.75rem 0.5rem rgba(255,255,255, 0.4) inset,
+							0 0.25rem 0.5rem 0 rgba(81, 82, 92, 1) inset;
+                            
+        --cuatro-principal: rgb(224, 196, 214);
+        --cuatro-secundario: rgb(216, 206, 186, .5);
+        --cuatro-extra: rgba(81, 82, 92, 1);
+        --cuatro-seleccion: rgb(27, 56, 61);
+        --cuatro-texto: #FFFFFF;
+        --cuatro-texto-secundario: #FFFFFF;
+        --cuatro-principal-transparente: rgba(6, 6, 8, 0.3);
+        --cuatro-secundario-transparente: rgba(31, 30, 32, 0.3);
+        --cuatro-3defecto:0 1rem 1.25rem 0 rgba(22,75,195,0.50),
+							0 -0.25rem 1.5rem rgba(6, 6, 8, 1) inset,
+							0 0.75rem 0.5rem rgba(255,255,255, 0.4) inset,
 							0 0.25rem 0.5rem 0 rgba(81, 82, 92, 1) inset;}
     /* Basico */
     * {
@@ -175,6 +189,8 @@
         margin-right: 0px;
         margin-top: 1px;
         font-size: 20px;
+        background: none;
+        border: none;
         font-family: "Copperplate";
         box-shadow: var(--uno-3defecto);}
     .menu__project, .menu__home{
@@ -270,8 +286,6 @@
         text-align: center;
         color: var(--dos-texto);}
     .reciclar{
-        width: 400px;
-        height: 400px;
         padding: 8px;}
     /* Card*/
     .card-grid{
@@ -852,9 +866,9 @@ var myChart = new Chart(
         document.getElementById("body-lateral").style.boxShadow = `var(--${theme}-3defecto)`;
         document.getElementById("body-principal").style.boxShadow = `var(--${theme}-3defecto)`;
         document.getElementById("menu-principal").style.boxShadow = `var(--${theme}-3defecto)`;
-        document.getElementById("drp1").style.backgroundColor = `var(--${theme}-secundario)`;
-        document.getElementById("drp2").style.backgroundColor = `var(--${theme}-secundario)`;
-        document.getElementById("drp3").style.backgroundColor = `var(--${theme}-secundario)`;
+        //document.getElementById("drp1").style.backgroundColor = `var(--${theme}-secundario)`;
+        //document.getElementById("drp2").style.backgroundColor = `var(--${theme}-secundario)`;
+        //document.getElementById("drp3").style.backgroundColor = `var(--${theme}-secundario)`;
         cambiarCssVariable(`--cero-selection`, `var(--${theme}-seleccion)`)}
     // Login
     function showLogin(){

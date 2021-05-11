@@ -17,13 +17,13 @@
                     <ul class="menu__dropdown" id="drp1">
                         <button id="btn-presentacion"onclick="pagePresentacion('reciclar')">Sobre mi</button>
                         <button id="btn-lenguajes" onclick="pageLenguajes('reciclar')">Lenguajes</button>
-                        <button id="btn-contacto" onclick="showContacto(['reciclar'])">Tecnologias</button>                    
+                        <button id="btn-contacto" onclick="pageTecnologias('reciclar')">Tecnologias</button>                    
                     </ul>
                 </div>
                 <div class="menu__project">
                     <button id="btn-project" onclick="showDrop('drp2', 'btn-project')"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/Add_document_icon_%28the_Noun_Project_27896%29.svg/1024px-Add_document_icon_%28the_Noun_Project_27896%29.svg.png" style="width: 25px; height: 15px;">Samples</button>
                     <ul class="menu__dropdown" id="drp2">
-                        <button onclick="loginNew('reciclar')">Login CSS</button>
+                        <button onclick="pageLogin('reciclar')">Login CSS</button>
                         <button onclick="createTable('reciclar')">Peticion WebApi</button>
                         <button onclick="pageDnD('reciclar')">Mover elementos</button>
                         <button>Cards CSS</button> 
@@ -542,7 +542,7 @@
                             {'name': 'Kotlin', 'imagen': 'https://images.unsplash.com/photo-1588690154757-badf4644190f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=967&q=80'},
                             {'name': 'CSS', 'imagen': 'https://images.unsplash.com/photo-1505685296765-3a2736de412f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1050&q=80'},
                             {'name': 'TypeScript', 'imagen': 'https://images.unsplash.com/photo-1618335829737-2228915674e0?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80'}];
-    const frameworks = [{'name': 'Angular', 'imagen': 'https://images.unsplash.com/photo-1549108101-74503aa0b925?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=401&q=80'},
+    const tecnologias = [{'name': 'Angular', 'imagen': 'https://images.unsplash.com/photo-1549108101-74503aa0b925?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=401&q=80'},
                             {'name': 'WebApi', 'imagen': 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1050&q=80'},
                             {'name': 'MySql', 'imagen': 'https://images.unsplash.com/photo-1489389944381-3471b5b30f04?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1050&q=80'},
                             {'name': 'SQL Server', 'imagen': 'https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1050&q=80'},
@@ -645,78 +645,30 @@
         // Agregar a pantalla
         container.appendChild(card_grid)
         lateral.appendChild(container);
-    }
-    
-    function loginNew(divAnterior){
+    }   
+    function pageTecnologias(divAnterior){
+        let getElements= tecnologias.map(function(element){return [element.name, element.imagen]});
         borrarDiv(divAnterior);
-        tile.textContent = "Login Presentacion";
-
-        createLogin();
+        tile.textContent = "Lenguajes de Programacion";
+        // Crear div contenedor        
+        let container = document.createElement('div')
+        container.className = "reciclar"
+        container.id = "reciclar"
+        let card_grid = document.createElement("div");
+        card_grid.className = "card-grid"
+        // Crear Cards
+        getElements.forEach(element => {
+            let new_card = createCard(element[1], element[0]);
+            card_grid.appendChild(new_card);});
+        // Agregar a pantalla
+        container.appendChild(card_grid)
+        lateral.appendChild(container);
     }
     function pageLogin(divAnterior){
         borrarDiv(divAnterior);
         tile.textContent = "Login Presentacion";
-        let page = document.createElement('div')
-        page.className = "reciclar"
-        page.id = "reciclar"
-        
-        let loginPage = document.createElement("div");
-        loginPage.className = "login-page"
-        loginPage.id = "login-page";
-
-        let logo = document.createElement("IMG");
-        logo.setAttribute("src", "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1c/DC_Comics_logo.png/600px-DC_Comics_logo.png");
-
-        let login = document.createElement("div");
-        login.className = "login";
-        login.id = "login";
-        
-        let alert = document.createElement("h1")
-        alert.id = "alert";
-        //alert.textContent = "Verificar correo";
-
-        let container = document.createElement("div");
-        container.className = "login__container";
-
-        let txtUser = document.createElement("h1");
-        let a = document.createElement("a");
-        txtUser.appendChild(a);
-        txtUser.textContent = "Usuario";
-
-        let inpUser = document.createElement("input");
-        inpUser.type = "email";
-        inpUser.name = "mail";
-        inpUser.id = "mail";
-        inpUser.placeholder = "uruario@dominio.mx";
-
-        let txtPassword = document.createElement("h1");
-        txtPassword.textContent = "Constrasena";
-
-        let inpPassword = document.createElement("input");
-        inpPassword.type = "password";
-        inpPassword.name = "password";
-        inpPassword.id = "password";
-
-        let btnSubmit = createButton("submit", "Login");
-
-        
-        container.appendChild(txtUser);
-        container.appendChild(inpUser);
-        container.appendChild(txtPassword);
-        container.appendChild(inpPassword);
-        container.appendChild(btnSubmit);
-
-        login.appendChild(alert);
-        login.appendChild(container);
-        
-        loginPage.appendChild(logo);
-        loginPage.appendChild(login);
-        
-
-        page.appendChild(loginPage);
-        lateral.appendChild(page);
+        createLogin();
     }
-    
     function pageTable(divAnterior){}
     function pageDnD(divAnterior){}
     // DnD Funcion
@@ -914,6 +866,9 @@
         // Union Final
         reciclar.appendChild(login_page);
         lateral.appendChild(reciclar)
+
+        let logo = document.createElement("IMG");
+        logo.setAttribute("src", "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1c/DC_Comics_logo.png/600px-DC_Comics_logo.png");
     }
     // Elementos HTML
     function createInput(type, id, hint){

@@ -28,8 +28,8 @@
                         <button onclick="pageLogin('reciclar')">Login CSS</button>
                         <button onclick="createTable('reciclar')">Peticion WebApi</button>
                         <button onclick="createPage('reciclar')">Charts</button>
-                        <button>Carrousel TODO</button> 
-                        <button>DashBoard TODO</button>                  
+                        <button onclick="pageQrCode('reciclar')">UIX Desktop</button>
+
                     </ul>
                 </div>
                 <div class="theme">
@@ -66,17 +66,29 @@
         <div class="principal" id="body-principal">
             <h2 class="titulo" id="titulo">Login</h2>
             <div class="reciclar" id="reciclar">
-                <div class="chart-page">
-                    <div class="chart-page__search">
-                        <h1>Medicion de CO del Aire en Monterrey</h1>
-                        <input type="date" name="date" id="date">
-                        <button onclick="displayData()">Agregar Datos</button>
+                <div class="window"id="window-1">
+                    <div class="header"id="window-1-header">
+                        <div class="header__opciones">
+                            <button>1</button>
+                            <button>2</button>                            
+                        </div>
                     </div>
-                    <div class="chart">
-                        <canvas class="myChart" id="myChart"></canvas>
-                    </div>
+                    <p>Move</p>
+                    <p>this</p>
+                    <p>DIV</p>
                 </div>
-            <button onclick="addInfo()"></button>
+                <div class="window"id="window-2">
+                    <div class="header"id="window-2-header">
+                        <div class="header__opciones">
+                            <button>1</button>
+                            <button>2</button>                            
+                        </div>
+                    </div>
+                    <p>Move</p>
+                    <p>this</p>
+                    <p>DIV</p>
+            </div>
+                </div>
             </div>
         </div> 
     </body>
@@ -576,6 +588,30 @@
     .chart-page button:hover{
         background: none;
     }
+    /* UIX Desktop */
+    .window {
+        width: 400px;
+        height: 400px;
+        position: absolute;
+        z-index: 1;
+        background-color: #f1f1f1;
+        text-align: center;
+        border: 1px solid #d3d3d3;}
+    #window-2{
+        right: 0;}
+    .header {
+    width: 400px;
+    height: 20px;
+    cursor: move;
+    z-index: 10;
+    background-color: #2196F3;
+    color: #fff;}
+    .header__opciones{
+        display:inline;
+        float: right;}
+    .header__opciones button{
+        width: 20px;
+        height: 20px;}
     /* Hover para Opciones de menu*/
     .menu__btn:hover{
         background-color: var(--cero-selection);}
@@ -941,8 +977,7 @@
         /*Chart Page
         Funcion asyncrona para desplegar chart empieza en call Weather
     */
-    var co = [];
-    
+    var co = [];  
     var myNewChart;
     function unixDate(date){
         let split = date.split("-")
@@ -1185,6 +1220,60 @@
         // Despues de crear los objetos crear Canvas
         var myChart = new Chart(document.getElementById('myChart'), config);
     }
+    // UIX Desktop
+    dragElement(document.getElementById("window-1"));
+    dragElement(document.getElementById("window-2"));
+    function dragElement(elmnt) {
+        console.log(elmnt.id);
+        var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+        if (document.getElementById(elmnt.id + "-header")) {
+            /* if present, the header is where you move the DIV from:*/
+            
+            document.getElementById(elmnt.id + "-header").onmousedown = dragMouseDown;
+        } else {
+            /* otherwise, move the DIV from anywhere inside the DIV:*/
+            elmnt.onmousedown = dragMouseDown;
+    }
+
+        function dragMouseDown(e) {
+            e = e || window.event;
+            e.preventDefault();
+            // Posision inicial del cursor
+            pos3 = e.clientX;
+            pos4 = e.clientY;
+            document.onmouseup = closeDragElement;
+            // Llama la funcion cuando el cursor se mueve
+            document.onmousemove = elementDrag;
+        }
+
+        function elementDrag(e) {
+            e = e || window.event;
+            e.preventDefault();
+            // Posizion atras de la otra ventana
+            let other = elmnt.id
+            other = `${other.slice(0,-1)}2`;
+            let f = document.getElementById(other)
+            f.style.zIndex = "-1"
+            // Poner al frente
+            elmnt.style.zIndex = "1"
+            console.log(elmnt.style.zIndex)
+            // Nueva posicion del cursor
+            pos1 = pos3 - e.clientX;
+            pos2 = pos4 - e.clientY;
+            pos3 = e.clientX;
+            pos4 = e.clientY;
+            elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+            elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+        }
+
+        function closeDragElement() {
+            /* al no moverse dejar d efuncionar*/
+            document.onmouseup = null;
+            document.onmousemove = null;
+       
+        }
+    }   
+    
     // Elementos HTML
     function createInput(type, id, hint){
         let input = document.createElement("input");

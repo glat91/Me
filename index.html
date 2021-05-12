@@ -27,7 +27,7 @@
                     <ul class="menu__dropdown" id="drp2">
                         <button onclick="pageLogin('reciclar')">Login CSS</button>
                         <button onclick="createTable('reciclar')">Peticion WebApi</button>
-                        <button onclick="pageCharts('reciclar')">Charts P</button>
+                        <button onclick="createPage('reciclar')">Charts</button>
                         <button>Carrousel TODO</button> 
                         <button>DashBoard TODO</button>                  
                     </ul>
@@ -70,7 +70,7 @@
                     <div class="chart-page__search">
                         <h1>Medicion de CO del Aire en Monterrey</h1>
                         <input type="date" name="date" id="date">
-                        <button onclick="addInfo()">Agregar Datos</button>
+                        <button onclick="displayData()">Agregar Datos</button>
                     </div>
                     <div class="chart">
                         <canvas class="myChart" id="myChart"></canvas>
@@ -83,24 +83,6 @@
 </html>
 
 <style>
-    .chart-page{
-        width: 100%;
-        height: 100%;
-    }
-    .chart{
-        margin: auto;
-        margin-top: 2%;
-        background: rgb(0, 61, 115, .9);
-
-        width: 80%;
-        height: 80%;
-        border-radius: 10px;
-        box-shadow:1rem 2rem 1.25rem 0 rgba(8, 8, 8, 0.5),
-							0 -0.25rem 1.5rem rgb(0, 61, 115, .9) inset,
-							0 0.75rem 0.5rem rgba(3, 232, 248, 0.4) inset,
-							0 0.25rem 0.5rem 0 rgba(0, 46, 87, 0.9) inset;
-        border: 2px solid rgb(0, 61, 115, .6);
-    }
     :root {
         --cero-3d-efect:0 1rem 1.25rem 0 rgba(22,75,195,0.50),
 							0 -0.25rem 1.5rem rgba(110, 15, 155, 1) inset,
@@ -553,7 +535,47 @@
         background-color: rgba(77, 11, 11, 0.548);
 }
     /* Charts */
-
+    .chart-page{
+        width: 100%;
+        height: 100%;}
+    .chart{
+        margin: auto;
+        margin-top: 2%;
+        background: rgb(0, 61, 115, .9);
+        width: 80%;
+        height: 80%;
+        border-radius: 10px;
+        box-shadow:1rem 2rem 1.25rem 0 rgba(8, 8, 8, 0.5),
+							0 -0.25rem 1.5rem rgb(0, 61, 115, .9) inset,
+							0 0.75rem 0.5rem rgba(3, 232, 248, 0.4) inset,
+							0 0.25rem 0.5rem 0 rgba(0, 46, 87, 0.9) inset;
+        border: 2px solid rgb(0, 61, 115, .6);}
+    .chart-page h1{
+        text-align: center;
+        color: #fff;
+    }
+    .chart-page input{
+        background: rgb(53, 52, 52);
+        margin-left: 10%;
+        box-shadow:1rem 2rem 1.25rem 0 rgba(8, 8, 8, 0.5),
+							0 -0.25rem 1.5rem rgb(0, 61, 115, .9) inset,
+							0 0.75rem 0.5rem rgba(3, 232, 248, 0.4) inset,
+							0 0.25rem 0.5rem 0 rgba(0, 46, 87, 0.9) inset;
+    }
+    .chart-page button{
+        background: rgb(14, 62, 151, .4);
+        border: none;
+        width: 100px;
+        height: 20px;
+        border-radius: 20px;
+        box-shadow:1rem 2rem 1.25rem 0 rgba(8, 8, 8, 0.5),
+							0 -0.25rem 1.5rem rgb(0, 61, 115, .5) inset,
+							0 0.75rem 0.5rem rgba(3, 232, 248, 0.4) inset,
+							0 0.25rem 0.5rem 0 rgba(0, 46, 87, 0.5) inset;
+    }
+    .chart-page button:hover{
+        background: none;
+    }
     /* Hover para Opciones de menu*/
     .menu__btn:hover{
         background-color: var(--cero-selection);}
@@ -920,6 +942,107 @@
         Funcion asyncrona para desplegar chart empieza en call Weather
     */
     var co = [];
+    
+    var myNewChart;
+    function unixDate(date){
+        let split = date.split("-")
+        console.log(`Year:${split[0]} Month:${split[1]} Day:${split[2]}`)
+        let start = Math.round( new Date(Date.UTC(split[0], split[1], split[2], 0, 0, 0, 0) / 1000));
+        let end = Math.round( new Date(Date.UTC(split[0], split[1], split[2], 23, 59, 59, 30) / 1000));
+        return [start, end];
+    }
+    function callAPiWheater(start, end){
+        let latitude = "25.6983320175888";
+        let longitude = "-100.23429833622565";
+        let key = "e361ab3a54ea18c0f8bf51870d225ea8"
+        let url = `https://api.openweathermap.org/data/2.5/air_pollution/history?lat=${latitude}&lon=${longitude}&start=${start}&end=${end}&appid=${key}`;
+        console.log(url)
+        return fetch(url).
+                    then(response => response.json()).
+                    then(json => json);
+    }
+    async function fetchData(date){
+        let fecha = unixDate(date);
+        console.log(`${fecha[0]} ${fecha[1]}`)
+        let json = await callAPiWheater(fecha[0], fecha[1]);
+        let list = json.list;
+        return list;
+    }
+    async function displayData(){
+        var ctx = document.getElementById("myChart").getContext("2d");
+        let fecha = document.getElementById("date").value;
+        let lista = await fetchData(fecha);
+        lista.forEach(elemento => {
+            co.push(elemento.components.co);
+            console.log(elemento.components.co)});
+        const data = {
+            labels: ['01:00', '02:00', '03:00', '04:00', '50:00', '06:00', '07:00', '08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '19:00', '19:00', '21:00', '21:00', '22:00', '23:00', '24:00'],
+            datasets: [{
+                label: '2020',
+                backgroundColor: 'rgb(113, 94, 78, .6)',
+                data: co,
+                }]
+        };
+        const config = {
+            type: 'line',
+            data: data,
+            options: {
+                scales: {
+                        yAxes: [{
+                            ticks: {
+                                fontColor: "#E4EBF2",
+                                fontSize: 10,
+                                stepSize: 500,
+                                beginAtZero: true
+                            }
+                        }],
+                        xAxes: [{
+                            ticks: {
+                                fontColor: "#E4EBF2",
+                                fontSize: 14,
+                                stepSize: 1,
+                                beginAtZero: true
+                            }
+                        }]
+                    },
+                legend: {
+                        labels: {
+                            fontColor: "#E4EBF2",
+                            fontSize: 18
+                        }
+                    },
+                elements: {
+                    line: {
+                        borderWidth: 3
+                        }
+                    }
+            },
+        };
+        //var myChart = new Chart(document.getElementById('myChart'), config);
+        myNewChart = new Chart(ctx, config);
+    }
+    function createPage(){
+        borrarDiv("reciclar")
+        let reciclar = createDiv('reciclar', 'reciclar');
+        let page = createDiv('chart-page');
+        let page_search = createDiv('chart-page__search');
+        let h1 = createH1("Some boring text");
+        let date = createInput("date", "date");
+        let btnSearch = createButton("displayData()", "Buscar Datos");
+        let chart = createDiv('chart', 'chart');
+        let canvas = createCanvas("myChart");
+        
+        chart.appendChild(canvas);
+        page_search.appendChild(h1);
+        page_search.appendChild(date);
+        page_search.appendChild(btnSearch);
+        page.appendChild(page_search);
+        page.appendChild(chart)
+        reciclar.appendChild(page)
+
+        lateral.appendChild(reciclar)
+    }
+    // old ApiWeather
     async function getData(year, month, day){
         let start = Math.round( new Date(Date.UTC(year, month, day, 0, 0, 0, 0) / 1000));
         let end = Math.round( new Date(Date.UTC(year, month, day, 23, 59, 59, 30) / 1000));
@@ -930,11 +1053,9 @@
     function callWeather(start, end){
         let latitude = "25.6983320175888";
         let longitude = "-100.23429833622565";
-
         let key = "e361ab3a54ea18c0f8bf51870d225ea8"
-        let url = `https://api.openweathermap.org/data/2.5/air_pollution/history?lat=${latitude}&lon=${longitude}&start=${start}&end=${end}&appid=${key}`;
+        let url = `https://api.openweathermap.org/data/2.5/air_pollution/history?lat=${latitude}&lon=${longitude}&start=${start}&end=${end}&appid=${key}`;        
         console.log(url)
-        
         return fetch(url).
                     then(response => response.json()).
                     then(json => json);}                 
@@ -949,13 +1070,13 @@
             console.log(`Hora ${new Date(elemento.dt * 1000)}`);
         });
         const data = {
-        labels: ['01:00', '02:00', '03:00', '04:00', '50:00', '06:00', '07:00', '08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '19:00', '19:00', '21:00', '21:00', '22:00', '23:00', '24:00'],
-        datasets: [{
-            label: '2020',
-            backgroundColor: 'rgb(113, 94, 78, .6)',
-            data: co,
-            }]
-    };
+            labels: ['01:00', '02:00', '03:00', '04:00', '50:00', '06:00', '07:00', '08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '19:00', '19:00', '21:00', '21:00', '22:00', '23:00', '24:00'],
+            datasets: [{
+                label: '2020',
+                backgroundColor: 'rgb(113, 94, 78, .6)',
+                data: co,
+                }]
+        };
         const config = {
             type: 'line',
             data: data,
@@ -1025,6 +1146,12 @@
         container.textContent = txt;
         container.setAttribute("onclick", click)
         if(clasName !== ""){container.className = clasName;}
+        return container;
+    }
+    function createCanvas(clasNameId){
+        let container = document.createElement("CANVAS");
+        container.className = clasNameId;
+        container.id = clasNameId;
         return container;
     }
     function borrarDiv(clasNAme){

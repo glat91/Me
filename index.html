@@ -970,11 +970,79 @@
     }
     async function displayData(){
         var ctx = document.getElementById("myChart").getContext("2d");
-        let fecha = document.getElementById("date").value;
-        let lista = await fetchData(fecha);
-        lista.forEach(elemento => {
-            co.push(elemento.components.co);
-            console.log(elemento.components.co)});
+        let fecha = document.getElementById("date").value
+        if (!fecha){
+            console.log(fecha)
+            fecha = "2020-11-14"
+            co = []
+            let lista = await fetchData(fecha);
+            lista.forEach(elemento => {
+                co.push(elemento.components.co);});
+            const data = {
+                labels: ['01:00', '02:00', '03:00', '04:00', '50:00', '06:00', '07:00', '08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '19:00', '19:00', '21:00', '21:00', '22:00', '23:00', '24:00'],
+                datasets: [{
+                    label: fecha,
+                    backgroundColor: 'rgb(113, 94, 78, .6)',
+                    data: co,
+                    }]
+            };
+            const config = {
+                type: 'line',
+                data: data,
+                options: {
+                    scales: {
+                            yAxes: [{
+                                ticks: {
+                                    fontColor: "#E4EBF2",
+                                    fontSize: 10,
+                                    stepSize: 500,
+                                    beginAtZero: true
+                                }
+                            }],
+                            xAxes: [{
+                                ticks: {
+                                    fontColor: "#E4EBF2",
+                                    fontSize: 14,
+                                    stepSize: 1,
+                                    beginAtZero: true
+                                }
+                            }]
+                        },
+                    legend: {
+                            labels: {
+                                fontColor: "#E4EBF2",
+                                fontSize: 18
+                            }
+                        },
+                    elements: {
+                        line: {
+                            borderWidth: 3
+                            }
+                        }
+                },
+            };
+            let chart = createDiv('chart', 'chart');
+            let canvas = createCanvas("myChart");
+            myNewChart = new Chart(ctx, config);}
+        else{
+            co = []
+            console.log( myNewChart.data.datasets[0].data[0]);
+            let lista = await fetchData(fecha);
+            lista.forEach(elemento => {
+                co.push(elemento.components.co);});
+            
+            myNewChart.data.datasets[0].data = co;
+            myNewChart.update();
+            
+        }      
+    }
+    // Posiuble funcion
+    async function createChart(){
+        var ctx = document.getElementById("myChart").getContext("2d");
+        let dmmy_date = unixDate(new Date(2020, 11, 24));
+        let dmmy_lista = await fetchData(dmmy_date);
+        dmmy_lista.forEach(elemento => {
+            co.push(elemento.components.co);});
         const data = {
             labels: ['01:00', '02:00', '03:00', '04:00', '50:00', '06:00', '07:00', '08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '19:00', '19:00', '21:00', '21:00', '22:00', '23:00', '24:00'],
             datasets: [{
@@ -984,44 +1052,44 @@
                 }]
         };
         const config = {
-            type: 'line',
-            data: data,
-            options: {
-                scales: {
-                        yAxes: [{
-                            ticks: {
+                type: 'line',
+                data: data,
+                options: {
+                    scales: {
+                            yAxes: [{
+                                ticks: {
+                                    fontColor: "#E4EBF2",
+                                    fontSize: 10,
+                                    stepSize: 500,
+                                    beginAtZero: true
+                                }
+                            }],
+                            xAxes: [{
+                                ticks: {
+                                    fontColor: "#E4EBF2",
+                                    fontSize: 14,
+                                    stepSize: 1,
+                                    beginAtZero: true
+                                }
+                            }]
+                        },
+                    legend: {
+                            labels: {
                                 fontColor: "#E4EBF2",
-                                fontSize: 10,
-                                stepSize: 500,
-                                beginAtZero: true
+                                fontSize: 18
                             }
-                        }],
-                        xAxes: [{
-                            ticks: {
-                                fontColor: "#E4EBF2",
-                                fontSize: 14,
-                                stepSize: 1,
-                                beginAtZero: true
+                        },
+                    elements: {
+                        line: {
+                            borderWidth: 3
                             }
-                        }]
-                    },
-                legend: {
-                        labels: {
-                            fontColor: "#E4EBF2",
-                            fontSize: 18
                         }
-                    },
-                elements: {
-                    line: {
-                        borderWidth: 3
-                        }
-                    }
-            },
-        };
-        //var myChart = new Chart(document.getElementById('myChart'), config);
-        myNewChart = new Chart(ctx, config);
+                },
+            };
+        
+        myNewChart = new Chart(ctx, config);   
     }
-    function createPage(){
+    async function createPage(){
         borrarDiv("reciclar")
         let reciclar = createDiv('reciclar', 'reciclar');
         let page = createDiv('chart-page');
@@ -1041,6 +1109,7 @@
         reciclar.appendChild(page)
 
         lateral.appendChild(reciclar)
+        displayData();
     }
     // old ApiWeather
     async function getData(year, month, day){

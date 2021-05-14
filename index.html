@@ -69,7 +69,7 @@
                 <div class="window"id="window-1">
                     <div class="header"id="window-1-header">
                         <div class="header__opciones">
-                            <button><img src="https://www.flaticon.com/svg/vstatic/svg/463/463569.svg?token=exp=1620876785~hmac=13f8c4a4adc00915d5a038fdcc1f8a79" alt=""></button>
+                            <button><img src="https://www.flaticon.com/svg/vstatic/svg/753/753322.svg?token=exp=1620883961~hmac=13723795f7fe2cbd98a59c1b7e6c834c" alt=""></button>
                             <button><img src="https://www.flaticon.com/svg/vstatic/svg/753/753345.svg?token=exp=1620876551~hmac=14d42ff084de4f5b6780ee2f7134f3a7" alt=""></button>                            
                         </div>                        
                     </div>
@@ -78,7 +78,7 @@
                 <div class="window-close"id="window-2">
                     <div class="header"id="window-2-header">
                         <div class="header__opciones">
-                            <button><img src="https://www.flaticon.com/svg/vstatic/svg/463/463569.svg?token=exp=1620876785~hmac=13f8c4a4adc00915d5a038fdcc1f8a79" alt=""></button>
+                            <button><img src="https://www.flaticon.com/svg/vstatic/svg/753/753322.svg?token=exp=1620883961~hmac=13723795f7fe2cbd98a59c1b7e6c834c" alt=""></button>
                             <button><img src="https://www.flaticon.com/svg/vstatic/svg/753/753345.svg?token=exp=1620876551~hmac=14d42ff084de4f5b6780ee2f7134f3a7" alt=""></button>                            
                         </div>
                         <p style="color:black;">Cerrada</p>
@@ -616,7 +616,7 @@
         border-top-left-radius: 10px;
         border-top-right-radius: 10px;
         width: 100%;
-        height: 2vh;
+        height: 3vh;
         cursor: move;
         z-index: 10;
         background-color: #2196F3;
@@ -627,8 +627,8 @@
         float: right;}
     .header__opciones button{
         border-radius: 50%;
-        width: 20px;
-        height: 20px;}
+        width: 30px;
+        height: 100%;}
     /* Hover para Opciones de menu*/
     .menu__btn:hover{
         background-color: var(--cero-selection);}
@@ -1240,6 +1240,11 @@
     // UIX Desktop
     dragElement(document.getElementById("window-1"));
     dragElement(document.getElementById("window-2"));
+    const div_principal = document.getElementById("reciclar")
+    var clientRect = div_principal.getBoundingClientRect();
+    var clientX = clientRect.left;
+    var clientY = clientRect.top;
+    console.log(`${clientY}`)
     function dragElement(elmnt) {
         console.log(elmnt.id);
         var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
@@ -1275,6 +1280,7 @@
             elmnt.style.zIndex = "1"
             console.log(elmnt.style.zIndex)
             // Nueva posicion del cursor
+            console.log(`x= ${e.clientX} y=${e.clientY}`)
             pos1 = pos3 - e.clientX;
             pos2 = pos4 - e.clientY;
             pos3 = e.clientX;

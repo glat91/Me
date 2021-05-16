@@ -28,7 +28,7 @@
                         <button onclick="pageLogin('reciclar')">Login CSS</button>
                         <button onclick="createTable('reciclar')">Peticion WebApi</button>
                         <button onclick="createPage('reciclar')">Charts</button>
-                        <button onclick="pageQrCode('reciclar')">UIX Desktop</button>
+                        <button onclick="pageDnD('reciclar')">UIX Desktop</button>
 
                     </ul>
                 </div>
@@ -73,7 +73,6 @@
                             <button><img src="https://www.flaticon.com/svg/vstatic/svg/753/753345.svg?token=exp=1620876551~hmac=14d42ff084de4f5b6780ee2f7134f3a7" alt=""></button>                            
                         </div>                        
                     </div>
-                    <p style="color:black;">Venana Abierta</p>
                 </div>
                 <div class="window-close"id="window-2">
                     <div class="header"id="window-2-header">
@@ -81,7 +80,6 @@
                             <button><img src="https://www.flaticon.com/svg/vstatic/svg/753/753322.svg?token=exp=1620883961~hmac=13723795f7fe2cbd98a59c1b7e6c834c" alt=""></button>
                             <button><img src="https://www.flaticon.com/svg/vstatic/svg/753/753345.svg?token=exp=1620876551~hmac=14d42ff084de4f5b6780ee2f7134f3a7" alt=""></button>                            
                         </div>
-                        <p style="color:black;">Cerrada</p>
                     </div>
             </div>
                 </div>
@@ -385,34 +383,34 @@
     padding-bottom: 100%;
     width: 100%;}
     .card__background{
-    background-size: cover;
-    background-position: center;
-    border-radius: 24px;
-    bottom: 0;
-    filter: brightness(0.75) saturate(1.2) contrast(0.85);
-    left: 0;
-    position:absolute;
-    right: 0;
-    top: 0;
-    transform-origin: center;
-    transition: 
-        filter 200ms linear,
-        transform 200ms linear;}
+        background-size: cover;
+        background-position: center;
+        border-radius: 24px;
+        bottom: 0;
+        filter: brightness(0.75) saturate(1.2) contrast(0.85);
+        left: 0;
+        position:absolute;
+        right: 0;
+        top: 0;
+        transform-origin: center;
+        transition: 
+            filter 200ms linear,
+            transform 200ms linear;}
     .card:hover .card__background{
         transform: scale(1.05) translateZ(0);
         padding-bottom: 100%;}
     .card-grid:hover > .card:not(:hover) .card__background{
         filter: brightness(0.5) saturate(0) contrast(1.2) blur(20px);}
     .card__content{
-    left: 0;
-    padding: 24px;
-    position: absolute;
-    top: 0;}
-    .card__categoria{
-    color: var(--dos-texto);
-    font-size: 1rem;
-    margin-bottom: 8px;
-    text-transform: uppercase;}
+        left: 0;
+        padding: 24px;
+        position: absolute;
+        top: 0;}
+        .card__categoria{
+        color: var(--dos-texto);
+        font-size: 1rem;
+        margin-bottom: 8px;
+        text-transform: uppercase;}
     /* Login-Page */
     .login-page{
         width: 80%;
@@ -529,19 +527,16 @@
         overflow-x:auto;
         margin-top: 5%;
         width: 120vh;
-        height: 40vh;
-    }
+        height: 40vh;}
     .page-DnD h1{
         color: var(--dos-texto);
         text-align:unset;
-        margin-left: 15%;
-    }
+        margin-left: 15%;}
     .DnD{
         width: 120vh;
         height: 20vh;
         overflow-x:auto;
-        background-color: rgba(77, 11, 11, 0.548);
-}
+        background-color: rgba(77, 11, 11, 0.548);}
     /* Charts */
     .chart-page{
         width: 100%;
@@ -560,16 +555,14 @@
         border: 2px solid rgb(0, 61, 115, .6);}
     .chart-page h1{
         text-align: center;
-        color: #fff;
-    }
+        color: #fff;}
     .chart-page input{
         background: rgb(53, 52, 52);
         margin-left: 10%;
         box-shadow:1rem 2rem 1.25rem 0 rgba(8, 8, 8, 0.5),
 							0 -0.25rem 1.5rem rgb(0, 61, 115, .9) inset,
 							0 0.75rem 0.5rem rgba(3, 232, 248, 0.4) inset,
-							0 0.25rem 0.5rem 0 rgba(0, 46, 87, 0.9) inset;
-    }
+							0 0.25rem 0.5rem 0 rgba(0, 46, 87, 0.9) inset;}
     .chart-page button{
         background: rgb(14, 62, 151, .4);
         border: none;
@@ -579,11 +572,9 @@
         box-shadow:1rem 2rem 1.25rem 0 rgba(8, 8, 8, 0.5),
 							0 -0.25rem 1.5rem rgb(0, 61, 115, .5) inset,
 							0 0.75rem 0.5rem rgba(3, 232, 248, 0.4) inset,
-							0 0.25rem 0.5rem 0 rgba(0, 46, 87, 0.5) inset;
-    }
+							0 0.25rem 0.5rem 0 rgba(0, 46, 87, 0.5) inset;}
     .chart-page button:hover{
-        background: none;
-    }
+        background: none;}
     /* UIX Desktop */
     .window-close{
         border-top-left-radius: 10px;
@@ -616,7 +607,7 @@
         border-top-left-radius: 10px;
         border-top-right-radius: 10px;
         width: 100%;
-        height: 3vh;
+        height: 42px;
         cursor: move;
         z-index: 10;
         background-color: #2196F3;
@@ -803,8 +794,10 @@
         tile.textContent = "Login Presentacion";
         createLogin();
     }
-    function pageTable(divAnterior){}
-    function pageDnD(divAnterior){}
+    function pageDnD(divAnterior){
+        borrarDiv(divAnterior);
+        crearDnD();
+    }
     // DnD Funcion
     var dragItem = null;
     var div2 = document.getElementsByClassName("DnD")
@@ -991,7 +984,7 @@
         let logo = document.createElement("IMG");
         logo.setAttribute("src", "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1c/DC_Comics_logo.png/600px-DC_Comics_logo.png");
     }
-        /*Chart Page
+    /*Chart Page
         Funcion asyncrona para desplegar chart empieza en call Weather
     */
     var co = [];  
@@ -1238,6 +1231,50 @@
         var myChart = new Chart(document.getElementById('myChart'), config);
     }
     // UIX Desktop
+    function crearDnD(){
+        let reciclar = createDiv('reciclar', 'reciclar');
+        let open = createButton("open()");
+        let close = createButton("close()");
+
+        let img_close = createImg("", "https://www.flaticon.com/svg/vstatic/svg/753/753322.svg?token=exp=1620883961~hmac=13723795f7fe2cbd98a59c1b7e6c834c");
+        let img_open = createImg("", "https://www.flaticon.com/svg/vstatic/svg/753/753345.svg?token=exp=1620876551~hmac=14d42ff084de4f5b6780ee2f7134f3a7");
+
+        let header1 = createDiv("header", "window-1-header");
+        let header2 = createDiv("header", "window-2-header");
+
+        let headerOpc2 = createDiv("header__opciones");
+
+        let window1 = createDiv('window', "window-1");
+        let window2 = createDiv("window-close", "window-2");
+
+        let h1 = createH1("Abierta");
+        let p = createP("Cerrado");
+        
+        open.appendChild(img_open);
+        close.appendChild(img_close);
+        
+
+        headerOpc2.appendChild(open);
+        headerOpc2.appendChild(close);
+
+        let headerOpc1 = headerOpc2.cloneNode()
+        console.log(headerOpc1)
+        header1.appendChild(headerOpc1);
+        window1.appendChild(header1);
+
+        header2.appendChild(headerOpc2);
+        window2.appendChild(header2);
+    
+        reciclar.appendChild(window1);
+        reciclar.appendChild(window2);
+        lateral.appendChild(reciclar)
+
+
+        
+        dragElement(document.getElementById("window-1"));
+        dragElement(document.getElementById("window-2"));
+
+    }
     dragElement(document.getElementById("window-1"));
     dragElement(document.getElementById("window-2"));
     const div_principal = document.getElementById("reciclar")
@@ -1334,6 +1371,11 @@
         let container = document.createElement("CANVAS");
         container.className = clasNameId;
         container.id = clasNameId;
+        return container;
+    }
+    function createP(txt){
+        let container = document.createElement("p");
+        container.textContent = txt;
         return container;
     }
     function borrarDiv(clasNAme){

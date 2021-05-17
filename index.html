@@ -34,7 +34,7 @@
                 </div>
                 <div class="theme">
                     <div class="theme__menu" id="theme">
-                        <button id="btn-theme" onclick="showDrop('drp3', 'btn-theme')"><img src="https://image.flaticon.com/icons/png/512/69/69524.png" style="width: 25px; height: 15px;">Cambiar Tema</button>
+                        <button id="btn-theme" onclick="showDrop('drp3', 'btn-theme')"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAABmJLR0QA/wD/AP+gvaeTAAACXklEQVRoge3YvWsUQRzG8Y+SqE0QMYKgJCAiGLUQ0UaUtBaCpWBjJYKN/gPWgl1ELGzUQlDxDfwHtEhEbARRFIOCEAwaSGIgyJlosXfxMtm9t53LbeQemOJuZ57f97kZZm6HrrrqKo8GMIb9nQZpRQMYxx9MWmMhtuGzBL7SvmFvJ6Ga0TqMWB5gzc3Efx3iO451kKspZYUoYbiDXE3pvwgxiGlrNMSgf2dCWit0iD34Khu+0CGGMGEl7H18Svm+pEC7Uxb8XfSU24eU54WYiYOSvT6Eu4n1Vf0KGeIQplKgblgOX1GhQhzFTArM1TrjevAxZVwJh9sFG+o4ZlMgrjQ4Pmsm3mN7bNhQw/iZUvxykz5ZId5pY4gTmA8KLuJSi349eGmVQpzEr6DQAs7n9O3FIytDvMHWnN5LGsJcUOA3zkbyzwrxQjJLufU4MC7hdAzjKmWFOJfXuM/KpXMmr2mGevEsqDWa13RfYDie17COdgb1ZhsdmLXW5oPPu8rGhVPa0Q9fJNckndLbRjtmBVjE9TgsLelWDJNNkmvDei8qsdtzkbZR6JccLqsFHx5kp8otl7bg9SrB91fV7ZO8qk5gc9FDhPBwrer5SN4AtG85pcEfkPznqvRZKH+XW7FnIg0enqb0fRIjAPFmIgv+iGQbD/svlp9FUd6ZyIKHOzXG3Y4VgNZnohY8yfV81tjJmAFaCVEPnvRLg0qbjh2AxkM0Ag8Pa3g8iMy+pH68qlF4VGPwJHetP1I8prA7KnWgjbgoeWGfK7cxXMCGJr124J5kOc1Ifvm2wnfV1VrVX//S9eSbHkrhAAAAAElFTkSuQmCC" style="width: 25px; height: 15px;">Cambiar Tema</button>
                         <ul class="theme__dropdown" id="drp3">
                             <button id="btn-uno"onclick="changueTheme('uno')">Natural</button>
                             <button id="btn-dos" onclick="changueTheme('dos')">Pink</button>
@@ -616,10 +616,15 @@
         margin-right: 8px;
         display:inline;
         float: right;}
+    .header__opciones img{
+        width: 100%;
+        height: 100%;
+    }
     .header__opciones button{
-        border-radius: 50%;
+        border-radius: 30%;
         width: 30px;
-        height: 100%;}
+        height: 30px;
+        background-color: none;}
     /* Hover para Opciones de menu*/
     .menu__btn:hover{
         background-color: var(--cero-selection);}
@@ -1240,8 +1245,8 @@
         window.className = "window"
     }
     function crearDnD(){
-        let close_image = "https://img-premium.flaticon.com/png/512/845/845648.png?token=exp=1621210971~hmac=967c70250762777e4557add6d322d437"
-        let open_image = "https://img-premium.flaticon.com/png/512/929/929409.png?token=exp=1621210825~hmac=bb7381c4644d7c664c288d597e952dfe";
+        let close_image = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAABmJLR0QA/wD/AP+gvaeTAAAD9ElEQVRoge3Yz28bRRTA8e/Muti4B0jSQOyUGxJ3BFJJ0iZREQQRkMqJvyCi4gIcKEmaXy5JaU/Aqf0zQKhFVFDcJiq9ceRMEhfRIhRInATvzOPg2rFj7+x6U8k++F1WXmvGn7cz82bW0I1udKMb7QwV9MXOu++/LajrwKCIgAAcXOXQZwSkfBMOXevuO9pX79e330CY6l27ebOZUwclIKhrbceX+z0pYq8HOQMTAE62+ckj5c5BeKHlBNqOF6lr23ICnYSv9tdSAp2ED/aHj0Bn4GOOQMfgHSOQCORHxPsi7BqfY0qTVCoSft8aStaSUpqEUuH4o66BIPx/Yvl34ATPrMzjv/YKRd8Pxe8aH3/kFD1Xc2xnBtizJhTvWsSBIxDlye8M9DP45RUSfb0cf/VlHuSusJNfI629pviiKcHYaQaXplGeR+qlF/n9g0/wNv8goWgZDxFGIGjO7xqfvg+nSPT1AqA8j8z8BTgzRNH4gfjsYzxA4kQf/R+dZ88aNz7WFApZsMeU5p/vvkeMqTZRnkdm4TMYHa4mEYQHEGPY+vYGCYUbHyeBsGqTVAq1ep8Hi5cbksguTsPZUbZ9v4wfHWnEW0th8Qskv0YS7cS7JpHrLBRaKtOeh7r7C4WFlbok0JrM3Kfo18fK+NxMI37hMvaHn0grLxzvGIHA4/TWG+9V1E3xtdVm1xjsyKkGKFYQBKUPnlMsvAjP/XqnqTXSCIRtUk9rjb57j8L88qGRUE8EH/MoEQ1fm4S6c4/C3DJY26Q7OQI+1kYWHV+9LwJKNf05VenK1rSLiHdtBdGqUAT8rvGR0eHyOtBNutWK7NI03pvj7PimNXy8o0RMfG21EambTkprsrkZvIlxtn2/BXycBI6Kt5bC/Arr00v1+4TWZHOzeG+dpWhMNHy8RRyOL5pSMP7xguX2KhtNkhi8NIueGGfbmFB87DcyF37fGuT0UCPeGDYvfl6tNmmt4fYqm7OXmiRxETU+zL61bny8o0QwHhFK1vLs5EQjfm4Z+TFfVyrTSmNv/czGTK7h2NFzbpKSsbHwzgScpRJIKc3Dr67hP/rLia9Um7T2kFv5uulUeviIP69+TUorNz7OUeLvsXckCF+Zr/tiKWaep//j82x9cwPJr4VuUkVrkbEhes5NlvHrBZ5CufEiDPx2v6nVkcCkuPCVP518K+xZQ0IR7VQpwr61lIwlpRVeBLwAmYAEQt/IGvAc4BFIKDiudf10C9mkkiiSng6fNrXtAiK8Ch3GN5Q8aQkfqdo0tAtWuqtQp+BjjUAH4V3vZNHfB9qJjzOFOgofbxGz0Tl4WW89AWEKkY0OwU85HnQ3utGNbrQx/geUXOzhLxT8xgAAAABJRU5ErkJggg=="
+        let open_image = "data:image/png;base64,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";
         let reciclar = createDiv('reciclar', 'reciclar');
 
         let open1 = createButton("close_window(1)");
